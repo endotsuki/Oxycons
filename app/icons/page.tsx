@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/input';
-import { Oxycons, CATEGORIES, getCategoryInfo } from '@/lib/icons/registry';
+import { Oxycons, CATEGORIES, getCategoryInfo, getIconsByCategory } from '@/lib/icons/registry';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -33,40 +33,34 @@ function IconsPageContent() {
     }
   }, [categoryFromUrl]);
 
-  const iconsByCategory = useMemo(() => {
-    const iconMap: Record<string, string> = {
-      Html: 'programming',
-      Css: 'programming',
-      Php: 'programming',
-      Mobile: 'app',
-      WebApp: 'app',
-      Figma: 'design-tools',
-      Adobe: 'design-tools',
-      ChatGPT: 'ai',
-      ML: 'ai',
-      Git: 'tools',
-      Docker: 'tools',
-      React: 'framework',
-      Vue: 'framework',
-      NodeJS: 'framework',
-    };
+    const iconsByCategory = useMemo(() => {
+      // Use registry helper to get raw category arrays (values)
+      const raw = getIconsByCategory();
 
-    const result: Record<string, { name: string; component: any }[]> = {};
-    CATEGORIES.forEach((cat) => {
-      result[cat] = [];
-    });
+      const result: Record<string, { name: string; component: any }[]> = {};
+      CATEGORIES.forEach((cat) => {
+        result[cat] = [];
+      });
 
-    Object.entries(Oxycons).forEach(([name, component]) => {
-      if (component && typeof component === 'function') {
-        const category = iconMap[name] || 'framework';
-        if (result[category]) {
+      Object.entries(raw).forEach(([category, components]) => {
+        if (!result[category]) return;
+        components.forEach((item: any) => {
+          if (!item) return;
+          // Registry now returns { name, component } items
+          const exportName = item.name || (item.component && (item.component.displayName || item.component.name));
+          const component = item.component || item;
+
+          // Prefer the export/const name (what you asked for)
+          let name = String(exportName || 'icon').replace(/Icon$/, '');
+          // Normalize casing: capitalize first letter, keep rest as-is
+          name = name.charAt(0).toUpperCase() + name.slice(1);
+
           result[category].push({ name, component });
-        }
-      }
-    });
+        });
+      });
 
-    return result;
-  }, []);
+      return result;
+    }, []);
 
   const filteredIcons = useMemo(() => {
     const filtered: { category: string; icons: { name: string; component: any }[] }[] = [];

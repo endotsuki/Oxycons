@@ -1,9 +1,14 @@
 import { createIcon } from '../../create-icon';
 
-export const Css = createIcon({
+export const CSS = createIcon({
   name: 'css',
   viewBox: '0 0 100 100',
-  path: 'M10 10L20 85L50 95L80 85L90 10H10zm60 20H30v10h40V30zm-50 20H20v10h40V50H20zm30 20H30v10h20v10H20v-20h20V70z',
+  svg: `<path fill="currentColor" d="M66.208 0 50.13 28.574H18L34.064 0z" opacity=".45" />
+    <path fill="currentColor" d="M50.131 28.574h32.14L66.21 0H34.064z" opacity=".6" />
+    <path fill="currentColor" d="m34.064 57.134 16.067-28.56L34.064 0 18 28.574z" opacity=".8" />
+    <path fill="currentColor" d="m34.221 99.997 16.077-28.574H82.44L66.364 99.996z" opacity=".45" />
+    <path fill="currentColor" d="M50.298 71.423h-32.14L34.22 99.996h32.143z" opacity=".6" />
+    <path fill="currentColor" d="M66.364 42.86 50.297 71.423l16.067 28.573L82.44 71.423z" opacity=".8" />`,
   categories: ['programming', 'languages'],
   keywords: ['css', 'styling', 'web', 'code'],
 });

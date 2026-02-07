@@ -30,14 +30,49 @@ export const getIconNames = (): string[] => {
 
 // Get all categories with their icons
 export const getIconsByCategory = () => {
-  return {
-    programming: Object.values(Programming),
-    app: Object.values(App),
-    'design-tools': Object.values(DesignTools),
-    ai: Object.values(AI),
-    tools: Object.values(Tools),
-    framework: Object.values(Framework),
+  // Start with empty arrays for every known category
+  const buckets: Record<string, any[]> = {
+    programming: [],
+    app: [],
+    'design-tools': [],
+    ai: [],
+    tools: [],
+    framework: [],
   };
+
+  // Merge all exports into a single map to iterate
+  const all: Record<string, any> = {
+    ...Programming,
+    ...App,
+    ...DesignTools,
+    ...AI,
+    ...Tools,
+    ...Framework,
+  };
+
+  Object.entries(all).forEach(([exportName, component]) => {
+    if (!component) return;
+
+    // Try to read metadata attached to the component (created in createIcon)
+    const meta = (component as any).metadata;
+
+    // Prepare an item that includes the export name and the component
+    const item = { name: exportName, component };
+
+    // If metadata includes categories, add the component into each listed category
+    if (meta && Array.isArray(meta.categories) && meta.categories.length > 0) {
+      meta.categories.forEach((cat: string) => {
+        if (!buckets[cat]) buckets[cat] = [];
+        buckets[cat].push(item);
+      });
+      return;
+    }
+
+    // Fallback: add to framework by default
+    buckets['framework'].push(item);
+  });
+
+  return buckets;
 };
 
 // Get category info

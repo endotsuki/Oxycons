@@ -3,7 +3,12 @@ import { createIcon } from '../../create-icon';
 export const Mobile = createIcon({
   name: 'mobile',
   viewBox: '0 0 100 100',
-  path: 'M25 15H75C80 15 85 20 85 25V75C85 80 80 85 75 85H25C20 85 15 80 15 75V25C15 20 20 15 25 15zm35 65C65 82 70 82 70 82H30C30 82 35 82 40 80V15H60V80z',
+  svg: `<path fill="currentColor" d="M66.208 0 50.13 28.574H18L34.064 0z" opacity=".45" />
+    <path fill="currentColor" d="M50.131 28.574h32.14L66.21 0H34.064z" opacity=".6" />
+    <path fill="currentColor" d="m34.064 57.134 16.067-28.56L34.064 0 18 28.574z" opacity=".8" />
+    <path fill="currentColor" d="m34.221 99.997 16.077-28.574H82.44L66.364 99.996z" opacity=".45" />
+    <path fill="currentColor" d="M50.298 71.423h-32.14L34.22 99.996h32.143z" opacity=".6" />
+    <path fill="currentColor" d="M66.364 42.86 50.297 71.423l16.067 28.573L82.44 71.423z" opacity=".8" />`,
   categories: ['app', 'devices'],
   keywords: ['mobile', 'phone', 'app', 'device'],
 });

@@ -15,6 +15,7 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
       className,
       children,
       'aria-label': ariaLabel,
+      viewBox = '0 0 24 24',
       ...props
     },
     ref
@@ -27,12 +28,7 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
         ref={ref}
         width={sizeValue}
         height={sizeValue}
-        viewBox="0 0 24 24"
-        fill={filled ? 'currentColor' : 'none'}
-        stroke="currentColor"
-        strokeWidth={filled ? 0 : 2}
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        viewBox={viewBox}
         className={`inline-block ${className || ''}`}
         aria-label={ariaLabel}
         role={ariaLabel ? 'img' : 'presentation'}

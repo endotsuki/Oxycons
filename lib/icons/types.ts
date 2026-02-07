@@ -36,11 +36,13 @@ export interface IconMetadata {
   /** Icon name/identifier */
   name: string;
   /** SVG viewBox attribute */
-  viewBox: string;
+  viewBox?: string;
   /** SVG path data - supports single string or array of paths */
   path?: string;
   /** Multiple paths for complex icons */
   paths?: PathData[];
+  /** Full SVG code as a string */
+  svg?: string;
   /** Whether the icon has a filled variant */
   hasFilled?: boolean;
   /** Icon categories for organization */

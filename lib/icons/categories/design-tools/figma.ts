@@ -3,7 +3,12 @@ import { createIcon } from '../../create-icon';
 export const Figma = createIcon({
   name: 'figma',
   viewBox: '0 0 100 100',
-  path: 'M30 20C30 15 35 10 40 10H60C65 10 70 15 70 20V40C70 45 65 50 60 50H40C35 50 30 45 30 40V20zm35 35C65 50 70 55 70 60C70 70 60 80 50 80C40 80 30 70 30 60C30 55 35 50 40 50H65z',
+  svg: `<path fill="currentColor" d="M66.208 0 50.13 28.574H18L34.064 0z" opacity=".45" />
+    <path fill="currentColor" d="M50.131 28.574h32.14L66.21 0H34.064z" opacity=".6" />
+    <path fill="currentColor" d="m34.064 57.134 16.067-28.56L34.064 0 18 28.574z" opacity=".8" />
+    <path fill="currentColor" d="m34.221 99.997 16.077-28.574H82.44L66.364 99.996z" opacity=".45" />
+    <path fill="currentColor" d="M50.298 71.423h-32.14L34.22 99.996h32.143z" opacity=".6" />
+    <path fill="currentColor" d="M66.364 42.86 50.297 71.423l16.067 28.573L82.44 71.423z" opacity=".8" />`,
   categories: ['design-tools', 'design'],
   keywords: ['figma', 'design', 'prototyping', 'ui'],
 });
