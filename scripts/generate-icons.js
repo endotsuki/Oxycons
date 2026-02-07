@@ -1,0 +1,193 @@
+#!/usr/bin/env node
+
+/**
+ * Icon Generator Script
+ * Automatically generates icon components from SVG files
+ *
+ * Usage:
+ *   node scripts/generate-icons.js [--input ./svgs] [--output ./lib/icons]
+ *
+ * This script:
+ * 1. Scans SVG files from input directory
+ * 2. Extracts path data and metadata
+ * 3. Generates TypeScript icon definitions
+ * 4. Creates pre-built icon components
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// Configuration
+const config = {
+  inputDir: process.argv.includes('--input')
+    ? process.argv[process.argv.indexOf('--input') + 1]
+    : './public/icons',
+  outputDir: process.argv.includes('--output')
+    ? process.argv[process.argv.indexOf('--output') + 1]
+    : './lib/icons',
+  dataFile: 'generated-icons.ts',
+  verbose: process.argv.includes('--verbose'),
+};
+
+/**
+ * Extract SVG path data from SVG file content
+ */
+function extractSvgData(svgContent) {
+  const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
+  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+
+  // Extract path elements
+  const pathMatches = svgContent.match(/<path[^>]*d="([^"]+)"[^>]*>/g) || [];
+  const paths = pathMatches.map((match) => {
+    const dataMatch = match.match(/d="([^"]+)"/);
+    return dataMatch ? dataMatch[1] : '';
+  });
+
+  return {
+    viewBox,
+    paths,
+    pathCount: paths.length,
+  };
+}
+
+/**
+ * Generate icon name from filename
+ */
+function generateIconName(filename) {
+  return path
+    .basename(filename, '.svg')
+    .toLowerCase()
+    .replace(/[-_\s]/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
+
+/**
+ * Generate icon metadata object
+ */
+function generateIconMetadata(filename, svgPath) {
+  const svgContent = fs.readFileSync(svgPath, 'utf8');
+  const svgData = extractSvgData(svgContent);
+  const iconName = generateIconName(filename);
+
+  if (svgData.paths.length === 0) {
+    console.warn(`⚠️  No path found in ${filename}`);
+    return null;
+  }
+
+  return {
+    name: iconName,
+    viewBox: svgData.viewBox,
+    path: svgData.paths[0], // Use first path
+    categories: ['custom'],
+    keywords: [iconName],
+  };
+}
+
+/**
+ * Generate TypeScript code for icons
+ */
+function generateTypeScriptCode(icons) {
+  const iconObjects = icons
+    .map((icon) => {
+      return `  '${icon.name}': {
+    name: '${icon.name}',
+    viewBox: '${icon.viewBox}',
+    path: '${icon.path}',
+    categories: ${JSON.stringify(icon.categories)},
+    keywords: ${JSON.stringify(icon.keywords)},
+  }`;
+    })
+    .join(',\n');
+
+  return `/**
+ * Auto-generated Icon Data
+ * Generated from SVG files in public/icons
+ *
+ * DO NOT EDIT MANUALLY
+ * Re-run \`npm run generate:icons\` to update
+ */
+
+import { IconMetadata } from './types';
+
+export const GENERATED_ICONS: Record<string, IconMetadata> = {
+${iconObjects}
+};
+
+export const GENERATED_ICON_COUNT = ${icons.length};
+`;
+}
+
+/**
+ * Main script execution
+ */
+async function main() {
+  try {
+    console.log('🎨 Generating icon components...\n');
+
+    // Check if input directory exists
+    if (!fs.existsSync(config.inputDir)) {
+      console.log(
+        `📁 Input directory not found: ${config.inputDir}`
+      );
+      console.log('   Create this directory and add SVG files to auto-generate icons.\n');
+      return;
+    }
+
+    // Read SVG files
+    const svgFiles = fs
+      .readdirSync(config.inputDir)
+      .filter((f) => f.endsWith('.svg'));
+
+    if (svgFiles.length === 0) {
+      console.log(`No SVG files found in ${config.inputDir}`);
+      return;
+    }
+
+    console.log(`Found ${svgFiles.length} SVG file(s):\n`);
+
+    // Generate metadata for each SVG
+    const icons = [];
+    svgFiles.forEach((filename) => {
+      const svgPath = path.join(config.inputDir, filename);
+      try {
+        const metadata = generateIconMetadata(filename, svgPath);
+        if (metadata) {
+          icons.push(metadata);
+          console.log(`✓ ${filename} → ${metadata.name}`);
+        }
+      } catch (error) {
+        console.error(`✗ Error processing ${filename}: ${error.message}`);
+      }
+    });
+
+    console.log(`\n✨ Successfully processed ${icons.length} icon(s)\n`);
+
+    // Generate TypeScript code
+    const tsCode = generateTypeScriptCode(icons);
+
+    // Create output directory if it doesn't exist
+    if (!fs.existsSync(config.outputDir)) {
+      fs.mkdirSync(config.outputDir, { recursive: true });
+    }
+
+    // Write generated file
+    const outputPath = path.join(config.outputDir, config.dataFile);
+    fs.writeFileSync(outputPath, tsCode);
+
+    console.log(`📝 Generated: ${outputPath}`);
+    console.log(`\n✅ Icon generation complete!\n`);
+
+    if (config.verbose) {
+      console.log('Generated icons:');
+      icons.forEach((icon) => {
+        console.log(`  - ${icon.name}`);
+      });
+      console.log();
+    }
+  } catch (error) {
+    console.error('❌ Error generating icons:', error);
+    process.exit(1);
+  }
+}
+
+main();
