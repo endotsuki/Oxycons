@@ -1,3 +1,3 @@
-export { HTML } from './html';
-export { CSS } from './css';
-export { PHP } from './php';
+export { CSS } from "./css";
+export { HTML } from "./html";
+export { PHP } from "./php";

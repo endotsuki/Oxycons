@@ -42,7 +42,8 @@
     "start": "next start",
     "lint": "eslint .",
     "generate:icons": "node scripts/generate-icons.js",
-    "generate:icons:verbose": "node scripts/generate-icons.js --verbose"
+    "generate:icons:verbose": "node scripts/generate-icons.js --verbose",
+    "update:indexes": "node scripts/update-indexes.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
