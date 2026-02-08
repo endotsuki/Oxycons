@@ -22,6 +22,11 @@
     "ui-icons",
     "design-system"
   ],
+  "files": [
+    "lib/icons",
+    "README.md",
+    "LICENSE"
+  ],
   "main": "./lib/icons/index.ts",
   "types": "./lib/icons/index.ts",
   "exports": {

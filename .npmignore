@@ -1,0 +1,7 @@
+src/
+node_modules/
+.vscode/
+.git/
+tests/
+pnpm-lock.yaml
+tsconfig.json
