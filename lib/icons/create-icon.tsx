@@ -1,24 +1,25 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Icon } from './icon';
-import { IconMetadata, IconProps } from './types';
+import React from "react";
+import { Icon } from "./icon";
+import { IconMetadata, IconProps } from "./types";
 
 /**
  * Create a reusable icon component from icon metadata
  *
  * @param metadata - Icon metadata including SVG path data (single or multiple) or full SVG code
- * @returns A React component that renders the icon
+ * @returns A React component that renders the icon with support for size and color customization
  *
  * @example
  * ```tsx
- * // Single path
+ * // Single path with size and color customization
  * const HomeIcon = createIcon({
  *   name: 'home',
  *   viewBox: '0 0 24 24',
  *   path: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
  *   categories: ['navigation'],
  * });
+ * <HomeIcon size={24} className="text-red-500" />
  *
  * // Multiple paths with properties
  * const ComplexIcon = createIcon({
@@ -29,7 +30,7 @@ import { IconMetadata, IconProps } from './types';
  *     { d: 'M40 40h20v20H40z', fill: '#000', opacity: 0.6 },
  *   ],
  * });
- * 
+ *
  * // Full SVG code
  * const LogoIcon = createIcon({
  *   name: 'logo',
@@ -42,9 +43,10 @@ import { IconMetadata, IconProps } from './types';
 export function createIcon(metadata: IconMetadata) {
   const IconComponent = React.forwardRef<SVGSVGElement, IconProps>(
     (props, ref) => {
-      const { size = 24, className = '', ...restProps } = props;
-      const sizeValue = typeof size === 'number' ? size : parseInt(size as string, 10);
-      
+      const { size = 24, className = "", ...restProps } = props;
+      const sizeValue =
+        typeof size === "number" ? size : parseInt(size as string, 10);
+
       // Handle full SVG code
       if (metadata.svg) {
         return (
@@ -55,7 +57,7 @@ export function createIcon(metadata: IconMetadata) {
             width={sizeValue}
             height={sizeValue}
             className={`inline-block ${className}`}
-            style={{ color: 'currentColor' }}
+            style={{ color: "currentColor" }}
             dangerouslySetInnerHTML={{ __html: metadata.svg }}
             {...restProps}
           />
@@ -67,14 +69,14 @@ export function createIcon(metadata: IconMetadata) {
       const singlePath = metadata.path;
 
       return (
-        <Icon {...props} ref={ref} viewBox={metadata.viewBox || '0 0 24 24'}>
+        <Icon {...props} ref={ref} viewBox={metadata.viewBox || "0 0 24 24"}>
           {hasPaths ? (
             // Render multiple paths with their individual properties
             metadata.paths!.map((pathData, index) => (
               <path
                 key={index}
                 d={pathData.d}
-                fill={pathData.fill || 'currentColor'}
+                fill={pathData.fill || "currentColor"}
                 stroke={pathData.stroke}
                 fillOpacity={pathData.fillOpacity}
                 strokeOpacity={pathData.strokeOpacity}
@@ -88,7 +90,7 @@ export function createIcon(metadata: IconMetadata) {
           )}
         </Icon>
       );
-    }
+    },
   );
 
   IconComponent.displayName = `${metadata.name}Icon`;
@@ -96,7 +98,7 @@ export function createIcon(metadata: IconMetadata) {
   // Attach metadata to the component so the registry can read categories, keywords, etc.
   try {
     // Use a non-enumerable property to avoid interfering with React internals
-    Object.defineProperty(IconComponent, 'metadata', {
+    Object.defineProperty(IconComponent, "metadata", {
       value: metadata,
       writable: false,
       configurable: true,
@@ -126,7 +128,7 @@ export function createIcon(metadata: IconMetadata) {
  * ```
  */
 export function createIcons(
-  metadataMap: Record<string, IconMetadata>
+  metadataMap: Record<string, IconMetadata>,
 ): Record<string, React.FC<IconProps>> {
   const icons: Record<string, React.FC<IconProps>> = {};
 
