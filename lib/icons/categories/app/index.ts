@@ -1,3 +1,5 @@
+export { AegisAuthenticator } from "./aegis-authenticator";
+export { Aiqfome } from "./aiqfome";
 export { AppleNews } from "./applenews";
 export { Behance } from "./behance";
 export { Facebook } from "./facebook";

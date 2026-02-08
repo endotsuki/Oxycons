@@ -183,7 +183,7 @@ function IconsPageContent() {
                         : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white"
                     }`}
                   >
-                    {info?.name ?? category}
+                    {info?.name ?? category}{' '}({iconsByCategory[category]?.length ?? 0})
                   </button>
                 );
               })}

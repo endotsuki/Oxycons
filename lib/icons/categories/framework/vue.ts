@@ -1,7 +1,7 @@
 import { createIcon } from "../../create-icon";
 
-export const Vue = createIcon({
-  name: "Vue.js",
+export const VueJS = createIcon({
+  name: "VueJS",
   viewBox: "0 0 24 24",
   svg: `<svg fill="currentColor">
     <path
