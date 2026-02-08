@@ -57,7 +57,7 @@ export function createIcon(metadata: IconMetadata) {
             width={sizeValue}
             height={sizeValue}
             className={`inline-block ${className}`}
-            style={{ color: "currentColor" }}
+            style={{ color: "inherit" }}
             dangerouslySetInnerHTML={{ __html: metadata.svg }}
             {...restProps}
           />
