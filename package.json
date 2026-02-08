@@ -23,24 +23,24 @@
     "design-system"
   ],
   "files": [
-    "lib",
+    "dist",
     "README.md",
     "LICENSE"
   ],
-  "main": "./lib/icons/index.ts",
-  "types": "./lib/icons/index.ts",
+  "main": "./dist/icons/index.js",
+  "types": "./dist/icons/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/icons/index.ts",
-      "types": "./lib/icons/index.ts"
+      "import": "./dist/icons/index.js",
+      "types": "./dist/icons/index.d.ts"
     },
     "./icons": {
-      "import": "./lib/icons/icons.ts",
-      "types": "./lib/icons/icons.ts"
+      "import": "./dist/icons/icons.js",
+      "types": "./dist/icons/icons.d.ts"
     },
     "./data": {
-      "import": "./lib/icons/data.ts",
-      "types": "./lib/icons/data.ts"
+      "import": "./dist/icons/data.js",
+      "types": "./dist/icons/data.d.ts"
     }
   },
   "scripts": {
@@ -48,6 +48,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "lib:build": "tsc -p tsconfig.lib.json",
+    "prepublishOnly": "npm run lib:build",
     "generate:icons": "node scripts/generate-icons.js",
     "generate:icons:verbose": "node scripts/generate-icons.js --verbose",
     "update:indexes": "node scripts/update-indexes.js"
