@@ -10,4 +10,6 @@ export * from "./categories/ai/index";
 export * from "./types";
 export * from "./create-icon";
 export * from "./icon";
-export * from "./categories-info";
+
+// Export registry with category namespaces and compiled icons
+export * from "./registry";
