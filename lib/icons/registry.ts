@@ -1,9 +1,10 @@
-import * as Programming from './categories/programming';
-import * as App from './categories/app';
-import * as DesignTools from './categories/design-tools';
-import * as AI from './categories/ai';
-import * as Tools from './categories/tools';
-import * as Framework from './categories/framework';
+import * as Programming from "./categories/programming";
+import * as App from "./categories/app";
+import * as DesignTools from "./categories/design-tools";
+import * as AI from "./categories/ai";
+import * as Tools from "./categories/tools";
+import * as Framework from "./categories/framework";
+import * as Company from "./categories/company";
 
 // Compile all icons from all categories
 export const Oxycons = {
@@ -19,6 +20,8 @@ export const Oxycons = {
   ...Tools,
   // Framework
   ...Framework,
+  // Company
+  ...Company,
 };
 
 export type OxyconsType = typeof Oxycons;
@@ -34,7 +37,7 @@ export const getIconsByCategory = () => {
   const buckets: Record<string, any[]> = {
     programming: [],
     app: [],
-    'design-tools': [],
+    "design-tools": [],
     ai: [],
     tools: [],
     framework: [],
@@ -48,6 +51,7 @@ export const getIconsByCategory = () => {
     ...AI,
     ...Tools,
     ...Framework,
+    ...Company,
   };
 
   Object.entries(all).forEach(([exportName, component]) => {
@@ -69,7 +73,7 @@ export const getIconsByCategory = () => {
     }
 
     // Fallback: add to framework by default
-    buckets['framework'].push(item);
+    buckets["framework"].push(item);
   });
 
   return buckets;
@@ -79,28 +83,32 @@ export const getIconsByCategory = () => {
 export const getCategoryInfo = (category: string) => {
   const info: Record<string, { name: string; description: string }> = {
     programming: {
-      name: 'Programming',
-      description: 'Programming languages and web technologies',
+      name: "Programming",
+      description: "Programming languages and web technologies",
     },
     app: {
-      name: 'App',
-      description: 'Application and device related icons',
+      name: "App",
+      description: "Application and device related icons",
     },
-    'design-tools': {
-      name: 'Design Tools',
-      description: 'Design and creative software icons',
+    "design-tools": {
+      name: "Design Tools",
+      description: "Design and creative software icons",
     },
     ai: {
-      name: 'AI',
-      description: 'Artificial intelligence and machine learning icons',
+      name: "AI",
+      description: "Artificial intelligence and machine learning icons",
     },
     tools: {
-      name: 'Tools',
-      description: 'Development and utility tools icons',
+      name: "Tools",
+      description: "Development and utility tools icons",
     },
     framework: {
-      name: 'Framework',
-      description: 'Web frameworks and libraries icons',
+      name: "Framework",
+      description: "Web frameworks and libraries icons",
+    },
+    company: {
+      name: "Company",
+      description: "Tech companies and brands icons",
     },
   };
 
@@ -109,10 +117,11 @@ export const getCategoryInfo = (category: string) => {
 
 // All categories
 export const CATEGORIES = [
-  'programming',
-  'app',
-  'design-tools',
-  'ai',
-  'tools',
-  'framework',
+  "programming",
+  "app",
+  "design-tools",
+  "ai",
+  "tools",
+  "framework",
+  "company",
 ];

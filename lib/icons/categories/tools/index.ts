@@ -1,3 +1,15 @@
+export { AbDownloadManager } from "./ab-download-manager";
+export { AbletonLive } from "./abletonlive";
+export { Acode } from "./acode";
+export { Actualbudget } from "./actual-budget";
+export { DataScience365 } from "./365-data-sience";
 export { Docker } from "./docker";
 export { Git } from "./git";
 export { Github } from "./github";
+export { GoAbstract } from "./go-abstract";
+export { OnePanel } from "./1panel";
+export { OnePassword } from "./1password";
+export { SevenZip } from "./7zip";
+export { ThirtySecondsOfCode } from "./thirty-seconds-of-code";
+export { TwoFAS } from "./2fas";
+export { _1_1_1_1 } from "./1.1.1.1";

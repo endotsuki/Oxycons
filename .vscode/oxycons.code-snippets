@@ -1,21 +1,21 @@
 {
-	"Create Icon Component": {
-		"scope": "typescript,typescriptreact",
-		"prefix": "template",
-		"body": [
-			"import { createIcon } from \"../../create-icon\";",
-			"",
-			"export const ${1:IconName} = createIcon({",
-			"\tname: \"${2:Icon Name}\",",
-			"\tviewBox: \"${3:0 0 24 24}\",",
-			"\tsvg: `<svg fill=\"currentColor\">",
-			"\t\t<path",
-			"\t\t\t d=\"${4:}\" />",
-			"\t</svg>`,",
-			"\tcategories: [\"${5:category}\"],",
-			"\tkeywords: [\"${6:keyword}\"],",
-			"});"
-		],
-		"description": "Create a new icon component"
-	}
+  "Create Icon Component": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "template",
+    "body": [
+      "import { createIcon } from \"../../create-icon\";",
+      "",
+      "export const ${1:IconName} = createIcon({",
+      "\tname: \"${2:Icon Name}\",",
+      "\tviewBox: \"${3:0 0 24 24}\",",
+      "\tsvg: `<svg fill=\"currentColor\">",
+      "\t\t<path",
+      "\t\t\t d=\"${4:}\" />",
+      "\t</svg>`,",
+      "\tcategories: [\"${5:category}\"],",
+      "\tkeywords: [\"${6:keyword}\"],",
+      "});",
+    ],
+    "description": "Create a new icon component",
+  },
 }
