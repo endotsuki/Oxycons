@@ -288,17 +288,6 @@ function IconsPageContent() {
 <Oxycons.Figma size={24} />`}</code>
               </pre>
             </div>
-            <div className="rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
-              <h3 className="text-sm font-semibold text-white mb-3">
-                By category
-              </h3>
-              <pre className="rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400 overflow-x-auto">
-                <code>{`import { Programming, Framework } from '@onimuxha/oxycons'
-
-<Programming.Html size={24} />
-<Framework.React size={24} />`}</code>
-              </pre>
-            </div>
           </div>
 
           <div className="mt-8 rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
