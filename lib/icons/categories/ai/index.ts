@@ -1,2 +1,2 @@
-export { ChatGPT } from './chatgpt';
-export { ML } from './ml';
+export { ChatGPT } from "./chatgpt";
+export { Gemini } from "./gemini";

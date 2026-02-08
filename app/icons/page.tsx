@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useMemo, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Input } from '@/components/ui/input';
-import { Oxycons, CATEGORIES, getCategoryInfo, getIconsByCategory } from '@/lib/icons/registry';
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { Input } from "@/components/ui/input";
+import {
+  CATEGORIES,
+  getCategoryInfo,
+  getIconsByCategory,
+} from "@/lib/icons/registry";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -21,9 +25,9 @@ const staggerItem = {
 
 function IconsPageContent() {
   const searchParams = useSearchParams();
-  const categoryFromUrl = searchParams.get('category');
+  const categoryFromUrl = searchParams.get("category");
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
 
@@ -33,44 +37,50 @@ function IconsPageContent() {
     }
   }, [categoryFromUrl]);
 
-    const iconsByCategory = useMemo(() => {
-      // Use registry helper to get raw category arrays (values)
-      const raw = getIconsByCategory();
+  const iconsByCategory = useMemo(() => {
+    // Use registry helper to get raw category arrays (values)
+    const raw = getIconsByCategory();
 
-      const result: Record<string, { name: string; component: any }[]> = {};
-      CATEGORIES.forEach((cat) => {
-        result[cat] = [];
+    const result: Record<string, { name: string; component: any }[]> = {};
+    CATEGORIES.forEach((cat) => {
+      result[cat] = [];
+    });
+
+    Object.entries(raw).forEach(([category, components]) => {
+      if (!result[category]) return;
+      components.forEach((item: any) => {
+        if (!item) return;
+        // Registry now returns { name, component } items
+        const exportName =
+          item.name ||
+          (item.component &&
+            (item.component.displayName || item.component.name));
+        const component = item.component || item;
+
+        // Prefer the export/const name (what you asked for)
+        let name = String(exportName || "icon").replace(/Icon$/, "");
+        // Normalize casing: capitalize first letter, keep rest as-is
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+
+        result[category].push({ name, component });
       });
+    });
 
-      Object.entries(raw).forEach(([category, components]) => {
-        if (!result[category]) return;
-        components.forEach((item: any) => {
-          if (!item) return;
-          // Registry now returns { name, component } items
-          const exportName = item.name || (item.component && (item.component.displayName || item.component.name));
-          const component = item.component || item;
-
-          // Prefer the export/const name (what you asked for)
-          let name = String(exportName || 'icon').replace(/Icon$/, '');
-          // Normalize casing: capitalize first letter, keep rest as-is
-          name = name.charAt(0).toUpperCase() + name.slice(1);
-
-          result[category].push({ name, component });
-        });
-      });
-
-      return result;
-    }, []);
+    return result;
+  }, []);
 
   const filteredIcons = useMemo(() => {
-    const filtered: { category: string; icons: { name: string; component: any }[] }[] = [];
+    const filtered: {
+      category: string;
+      icons: { name: string; component: any }[];
+    }[] = [];
     const categoryToShow = selectedCategory || undefined;
 
     Object.entries(iconsByCategory).forEach(([category, icons]) => {
       if (categoryToShow && category !== categoryToShow) return;
 
       const matchingIcons = icons.filter((icon) =>
-        icon.name.toLowerCase().includes(searchQuery.toLowerCase())
+        icon.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
 
       if (matchingIcons.length > 0) {
@@ -88,7 +98,10 @@ function IconsPageContent() {
     setTimeout(() => setCopiedIcon(null), 2000);
   };
 
-  const totalIcons = Object.values(iconsByCategory).reduce((sum, icons) => sum + icons.length, 0);
+  const totalIcons = Object.values(iconsByCategory).reduce(
+    (sum, icons) => sum + icons.length,
+    0,
+  );
 
   return (
     <div className="min-h-screen border-t border-zinc-800/80">
@@ -149,8 +162,8 @@ function IconsPageContent() {
                 onClick={() => setSelectedCategory(null)}
                 className={`rounded-sm border px-4 py-2 text-sm font-medium transition-colors ${
                   selectedCategory === null
-                    ? 'border-white bg-white text-black'
-                    : 'border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white'
+                    ? "border-white bg-white text-black"
+                    : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white"
                 }`}
               >
                 All
@@ -166,8 +179,8 @@ function IconsPageContent() {
                     title={info?.description}
                     className={`rounded-sm border px-4 py-2 text-sm font-medium transition-colors ${
                       isSelected
-                        ? 'border-white bg-white text-black'
-                        : 'border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white'
+                        ? "border-white bg-white text-black"
+                        : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white"
                     }`}
                   >
                     {info?.name ?? category}
@@ -188,7 +201,7 @@ function IconsPageContent() {
                   key={category}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
+                  viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.35 }}
                 >
                   <div className="mb-8">
@@ -204,7 +217,7 @@ function IconsPageContent() {
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: '-20px' }}
+                    viewport={{ once: true, margin: "-20px" }}
                   >
                     {icons.map(({ name, component: IconComponent }) => {
                       const iconId = `${category}-${name}`;
@@ -234,7 +247,9 @@ function IconsPageContent() {
                               {name}
                             </span>
                             {isCopied && (
-                              <span className="mt-1 text-xs text-emerald-400">Copied</span>
+                              <span className="mt-1 text-xs text-emerald-400">
+                                Copied
+                              </span>
                             )}
                           </button>
                         </motion.div>
@@ -247,7 +262,9 @@ function IconsPageContent() {
           </div>
         ) : (
           <div className="rounded-sm border border-zinc-800 bg-zinc-900/30 py-20 text-center">
-            <p className="text-lg font-medium text-zinc-400">No icons match your filters.</p>
+            <p className="text-lg font-medium text-zinc-400">
+              No icons match your filters.
+            </p>
             <p className="mt-2 text-sm text-zinc-500">
               Try a different search or category.
             </p>
@@ -276,7 +293,9 @@ function IconsPageContent() {
 
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
-              <h3 className="text-sm font-semibold text-white mb-3">Import all</h3>
+              <h3 className="text-sm font-semibold text-white mb-3">
+                Import all
+              </h3>
               <pre className="rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400 overflow-x-auto">
                 <code>{`import { Oxycons } from '@endo/oxycons'
 
@@ -285,7 +304,9 @@ function IconsPageContent() {
               </pre>
             </div>
             <div className="rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
-              <h3 className="text-sm font-semibold text-white mb-3">By category</h3>
+              <h3 className="text-sm font-semibold text-white mb-3">
+                By category
+              </h3>
               <pre className="rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400 overflow-x-auto">
                 <code>{`import { Programming, Framework } from '@endo/oxycons'
 

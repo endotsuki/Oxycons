@@ -1,14 +1,12 @@
-import { createIcon } from '../../create-icon';
+import { createIcon } from "../../create-icon";
 
 export const Git = createIcon({
-  name: 'git',
-  viewBox: '0 0 100 100',
-  svg: `<path fill="currentColor" d="M66.208 0 50.13 28.574H18L34.064 0z" opacity=".45" />
-    <path fill="currentColor" d="M50.131 28.574h32.14L66.21 0H34.064z" opacity=".6" />
-    <path fill="currentColor" d="m34.064 57.134 16.067-28.56L34.064 0 18 28.574z" opacity=".8" />
-    <path fill="currentColor" d="m34.221 99.997 16.077-28.574H82.44L66.364 99.996z" opacity=".45" />
-    <path fill="currentColor" d="M50.298 71.423h-32.14L34.22 99.996h32.143z" opacity=".6" />
-    <path fill="currentColor" d="M66.364 42.86 50.297 71.423l16.067 28.573L82.44 71.423z" opacity=".8" />`,
-  categories: ['tools', 'development'],
-  keywords: ['git', 'version', 'control', 'github'],
+  name: "git",
+  viewBox: "0 0 24 24",
+  svg: `<svg fill="#ffffff">
+    <path
+        d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.9 3.039a1.837 1.837 0 0 1-2.6 0a1.85 1.85 0 0 1-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348a1.85 1.85 0 0 1 0 2.6a1.844 1.844 0 0 1-2.609 0a1.834 1.834 0 0 1 0-2.598c.182-.18.387-.316.605-.406V8.835a1.834 1.834 0 0 1-.996-2.41L7.636 3.7L.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477a1.545 1.545 0 0 0 2.186 0l10.43-10.43a1.544 1.544 0 0 0 0-2.187" />
+</svg>`,
+  categories: ["tools", "development"],
+  keywords: ["git", "version", "control", "github"],
 });

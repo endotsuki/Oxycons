@@ -1,2 +1,2 @@
-export { Mobile } from './mobile';
-export { WebApp } from './webapp';
+export { AppleNews } from "./applenews";
+export { Telegram } from "./telegram";
