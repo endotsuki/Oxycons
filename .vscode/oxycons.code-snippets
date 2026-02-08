@@ -1,0 +1,21 @@
+{
+	"Create Icon Component": {
+		"scope": "typescript,typescriptreact",
+		"prefix": "template:icon",
+		"body": [
+			"import { createIcon } from \"../../create-icon\";",
+			"",
+			"export const ${1:IconName} = createIcon({",
+			"\t name: \"${2:Icon Name}\",",
+			"\t viewBox: \"${3:0 0 24 24}\",",
+			"\t svg: `<svg fill=\"currentColor\">",
+			"\t\t <path",
+			"\t\t\t d=\"${4:}\" />",
+			"\t </svg>`,",
+			"\t categories: [\"${5:tools}\"],",
+			"\t keywords: [\"${6:keyword}\"],",
+			"});"
+		],
+		"description": "Create a new icon component"
+	}
+}
