@@ -1,4 +1,4 @@
-# @endo/oxycons Integration Guide
+# @onimuxha/oxycons Integration Guide
 
 This guide covers different ways to integrate Oxycons into your React projects.
 
@@ -16,14 +16,14 @@ This guide covers different ways to integrate Oxycons into your React projects.
 ### 1. Installation
 
 ```bash
-npm install @endo/oxycons
+npm install @onimuxha/oxycons
 ```
 
 ### 2. Basic Usage
 
 ```tsx
 // app/page.tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 export default function Home() {
   return (
@@ -33,7 +33,7 @@ export default function Home() {
         Home
       </button>
     </main>
-  )
+  );
 }
 ```
 
@@ -41,12 +41,12 @@ export default function Home() {
 
 ```tsx
 // app/layout.tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html>
@@ -58,7 +58,7 @@ export default function RootLayout({
         {main}
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -66,14 +66,14 @@ export default function RootLayout({
 
 ```tsx
 // app/components/navigation.tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 export function Navigation() {
   return (
     <nav>
       <OxyIcons.menu size={24} />
     </nav>
-  )
+  );
 }
 ```
 
@@ -82,37 +82,35 @@ export function Navigation() {
 ### 1. Create React App
 
 ```bash
-npm install @endo/oxycons
+npm install @onimuxha/oxycons
 ```
 
 ```tsx
 // src/App.tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 function App() {
   return (
     <div>
       <OxyIcons.home size={24} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
 ```
 
 ### 2. Vite
 
 ```bash
-npm install @endo/oxycons
+npm install @onimuxha/oxycons
 ```
 
 ```tsx
 // src/main.tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <App />
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);
 ```
 
 ## TypeScript Support
@@ -120,11 +118,11 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ### 1. Full Type Support
 
 ```tsx
-import OxyIcons from '@endo/oxycons'
-import type { IconProps } from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
+import type { IconProps } from "@onimuxha/oxycons";
 
 interface MyComponentProps extends IconProps {
-  label: string
+  label: string;
 }
 
 function MyComponent({ label, ...iconProps }: MyComponentProps) {
@@ -133,26 +131,26 @@ function MyComponent({ label, ...iconProps }: MyComponentProps) {
       <OxyIcons.home {...iconProps} />
       {label}
     </button>
-  )
+  );
 }
 ```
 
 ### 2. Icon Metadata Types
 
 ```tsx
-import { searchIcons, getIconsByCategory } from '@endo/oxycons'
-import type { IconMetadata } from '@endo/oxycons'
+import { searchIcons, getIconsByCategory } from "@onimuxha/oxycons";
+import type { IconMetadata } from "@onimuxha/oxycons";
 
 function IconList() {
-  const icons: IconMetadata[] = searchIcons('arrow')
-  
+  const icons: IconMetadata[] = searchIcons("arrow");
+
   return (
     <ul>
       {icons.map((icon) => (
         <li key={icon.name}>{icon.name}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -174,25 +172,25 @@ This will create `lib/icons/generated-icons.ts`
 
 ```tsx
 // lib/icons/all-icons.ts
-import { ICON_DATA } from '@endo/oxycons'
-import { GENERATED_ICONS } from './generated-icons'
+import { ICON_DATA } from "@onimuxha/oxycons";
+import { GENERATED_ICONS } from "./generated-icons";
 
 export const ALL_ICONS = {
   ...ICON_DATA,
   ...GENERATED_ICONS,
-}
+};
 ```
 
 ```tsx
 // components/my-icon.tsx
-import { createIcon } from '@endo/oxycons'
-import { ALL_ICONS } from '@/lib/icons/all-icons'
+import { createIcon } from "@onimuxha/oxycons";
+import { ALL_ICONS } from "@/lib/icons/all-icons";
 
-const MyIcons = createIcons(ALL_ICONS)
+const MyIcons = createIcons(ALL_ICONS);
 
 export function MyIcon({ name }: { name: keyof typeof MyIcons }) {
-  const Icon = MyIcons[name]
-  return <Icon size={24} />
+  const Icon = MyIcons[name];
+  return <Icon size={24} />;
 }
 ```
 
@@ -200,15 +198,15 @@ export function MyIcon({ name }: { name: keyof typeof MyIcons }) {
 
 ```tsx
 // lib/icons/custom.tsx
-import { createIcon } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
 
 export const CustomIcon = createIcon({
-  name: 'custom',
-  viewBox: '0 0 24 24',
-  path: 'M12 2L2 20h20L12 2z',
-  categories: ['custom'],
-  keywords: ['custom', 'icon'],
-})
+  name: "custom",
+  viewBox: "0 0 24 24",
+  path: "M12 2L2 20h20L12 2z",
+  categories: ["custom"],
+  keywords: ["custom", "icon"],
+});
 ```
 
 ## Performance Optimization
@@ -219,29 +217,29 @@ Import only what you need:
 
 ```tsx
 // ❌ Avoid - imports all icons
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 // ✅ Better - imports only needed
-import { createIcon } from '@endo/oxycons'
-import { ICON_DATA } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
+import { ICON_DATA } from "@onimuxha/oxycons";
 
-const HomeIcon = createIcon(ICON_DATA.home)
+const HomeIcon = createIcon(ICON_DATA.home);
 ```
 
 ### 2. Dynamic Imports
 
 ```tsx
-import { lazy, Suspense } from 'react'
-import OxyIcons from '@endo/oxycons'
+import { lazy, Suspense } from "react";
+import OxyIcons from "@onimuxha/oxycons";
 
-const IconLibrary = lazy(() => import('@endo/oxycons'))
+const IconLibrary = lazy(() => import("@onimuxha/oxycons"));
 
 export function MyComponent() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <IconLibrary />
     </Suspense>
-  )
+  );
 }
 ```
 
@@ -256,8 +254,8 @@ npm run generate:icons:sprite
 ```tsx
 // components/sprite-icon.tsx
 interface SpriteIconProps {
-  id: string
-  size?: number
+  id: string;
+  size?: number;
 }
 
 export function SpriteIcon({ id, size = 24 }: SpriteIconProps) {
@@ -265,7 +263,7 @@ export function SpriteIcon({ id, size = 24 }: SpriteIconProps) {
     <svg width={size} height={size} className="inline-block">
       <use href={`/icons.svg#${id}`} />
     </svg>
-  )
+  );
 }
 ```
 
@@ -274,8 +272,8 @@ export function SpriteIcon({ id, size = 24 }: SpriteIconProps) {
 ### 1. Tailwind CSS
 
 ```tsx
-<OxyIcons.home 
-  size={24} 
+<OxyIcons.home
+  size={24}
   className="text-blue-500 hover:text-blue-700 dark:text-blue-400"
 />
 ```
@@ -296,19 +294,19 @@ export function SpriteIcon({ id, size = 24 }: SpriteIconProps) {
 
 ```tsx
 // components/icon.tsx
-import styles from '@/styles/icons.module.css'
-import OxyIcons from '@endo/oxycons'
+import styles from "@/styles/icons.module.css";
+import OxyIcons from "@onimuxha/oxycons";
 
 export function HomeIcon() {
-  return <OxyIcons.home size={24} className={styles.home} />
+  return <OxyIcons.home size={24} className={styles.home} />;
 }
 ```
 
 ### 3. CSS-in-JS
 
 ```tsx
-import styled from 'styled-components'
-import OxyIcons from '@endo/oxycons'
+import styled from "styled-components";
+import OxyIcons from "@onimuxha/oxycons";
 
 const StyledHome = styled(OxyIcons.home)`
   color: #3b82f6;
@@ -317,10 +315,10 @@ const StyledHome = styled(OxyIcons.home)`
   &:hover {
     color: #1e40af;
   }
-`
+`;
 
 export function HomeIcon() {
-  return <StyledHome size={24} />
+  return <StyledHome size={24} />;
 }
 ```
 
@@ -330,18 +328,18 @@ export function HomeIcon() {
 
 ```tsx
 // components/themed-icon.tsx
-import { useTheme } from 'next-themes'
-import OxyIcons from '@endo/oxycons'
+import { useTheme } from "next-themes";
+import OxyIcons from "@onimuxha/oxycons";
 
 export function ThemedIcon() {
-  const { theme } = useTheme()
-  
+  const { theme } = useTheme();
+
   return (
-    <OxyIcons.home 
+    <OxyIcons.home
       size={24}
-      className={theme === 'dark' ? 'text-white' : 'text-black'}
+      className={theme === "dark" ? "text-white" : "text-black"}
     />
-  )
+  );
 }
 ```
 
@@ -349,33 +347,33 @@ export function ThemedIcon() {
 
 ```tsx
 // contexts/icon-theme.tsx
-import { createContext, ReactNode } from 'react'
+import { createContext, ReactNode } from "react";
 
 interface IconTheme {
-  primaryColor: string
-  secondaryColor: string
-  size: number
+  primaryColor: string;
+  secondaryColor: string;
+  size: number;
 }
 
 export const IconThemeContext = createContext<IconTheme>({
-  primaryColor: '#000',
-  secondaryColor: '#666',
+  primaryColor: "#000",
+  secondaryColor: "#666",
   size: 24,
-})
+});
 
 // Provider component
-export function IconThemeProvider({ 
-  children, 
-  theme 
-}: { 
-  children: ReactNode
-  theme: IconTheme 
+export function IconThemeProvider({
+  children,
+  theme,
+}: {
+  children: ReactNode;
+  theme: IconTheme;
 }) {
   return (
     <IconThemeContext.Provider value={theme}>
       {children}
     </IconThemeContext.Provider>
-  )
+  );
 }
 ```
 
@@ -384,9 +382,10 @@ export function IconThemeProvider({
 ### Issue: Icons not displaying
 
 **Solution:**
+
 ```tsx
 // Make sure you're importing from the correct path
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 // Not from the lib directory
 // ❌ import OxyIcons from '@/lib/icons'
@@ -395,6 +394,7 @@ import OxyIcons from '@endo/oxycons'
 ### Issue: TypeScript errors
 
 **Solution:**
+
 ```tsx
 // Ensure you have proper TypeScript setup
 // tsconfig.json should include:
@@ -409,6 +409,7 @@ import OxyIcons from '@endo/oxycons'
 ### Issue: Styling not applying
 
 **Solution:**
+
 ```tsx
 // Make sure icons inherit color from parent
 <div style={{ color: 'blue' }}>
@@ -422,21 +423,23 @@ import OxyIcons from '@endo/oxycons'
 ### Issue: Large bundle size
 
 **Solution:**
+
 ```tsx
 // Use individual icons instead of importing all
-import { createIcon } from '@endo/oxycons'
-import { ICON_DATA } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
+import { ICON_DATA } from "@onimuxha/oxycons";
 
-const HomeIcon = createIcon(ICON_DATA.home)
-const SearchIcon = createIcon(ICON_DATA.search)
+const HomeIcon = createIcon(ICON_DATA.home);
+const SearchIcon = createIcon(ICON_DATA.search);
 
 // Instead of
-// import OxyIcons from '@endo/oxycons'
+// import OxyIcons from '@onimuxha/oxycons'
 ```
 
 ## Best Practices
 
 ### 1. Use Semantic Icons
+
 ```tsx
 // ✅ Good - uses appropriate icons for their purpose
 <button>
@@ -452,6 +455,7 @@ const SearchIcon = createIcon(ICON_DATA.search)
 ```
 
 ### 2. Accessibility
+
 ```tsx
 // ✅ Always provide context for icon-only buttons
 <button aria-label="Open search">
@@ -466,6 +470,7 @@ const SearchIcon = createIcon(ICON_DATA.search)
 ```
 
 ### 3. Consistency
+
 ```tsx
 // Define icon sizes in one place
 const ICON_SIZES = {
@@ -480,9 +485,10 @@ const ICON_SIZES = {
 ```
 
 ### 4. Performance
+
 ```tsx
 // Cache icon components if used multiple times
-const HomeIcon = createIcon(ICON_DATA.home)
+const HomeIcon = createIcon(ICON_DATA.home);
 
 export function Component() {
   return (
@@ -491,14 +497,14 @@ export function Component() {
       <HomeIcon size={24} />
       <HomeIcon size={24} />
     </>
-  )
+  );
 }
 ```
 
 ## Resources
 
 - [Main Documentation](../README_OXYCONS.md)
-- [GitHub Repository](https://github.com/endo-design/oxycons)
+- [GitHub Repository](https://github.com/onimuxha-design/oxycons)
 - [Icon Showcase](http://localhost:3000/icons)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [React Documentation](https://react.dev)
@@ -507,6 +513,7 @@ export function Component() {
 ## Support
 
 For issues, questions, or suggestions:
-- Open an issue on [GitHub](https://github.com/endo-design/oxycons/issues)
-- Start a discussion on [GitHub Discussions](https://github.com/endo-design/oxycons/discussions)
+
+- Open an issue on [GitHub](https://github.com/onimuxha-design/oxycons/issues)
+- Start a discussion on [GitHub Discussions](https://github.com/onimuxha-design/oxycons/discussions)
 - Check existing documentation and FAQs

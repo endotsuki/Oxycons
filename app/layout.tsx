@@ -50,7 +50,7 @@ export default function RootLayout({
                 Browse Icons
               </Link>
               <a
-                href="https://www.npmjs.com/package/@endo/oxycons"
+                href="https://www.npmjs.com/package/@onimuxha/oxycons"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"

@@ -92,7 +92,7 @@ function IconsPageContent() {
   }, [searchQuery, selectedCategory, iconsByCategory]);
 
   const handleCopyIcon = (iconName: string, category: string) => {
-    const code = `import { Oxycons } from '@endo/oxycons';\n\n<Oxycons.${iconName} size={24} />`;
+    const code = `import { Oxycons } from '@onimuxha/oxycons';\n\n<Oxycons.${iconName} size={24} />`;
     navigator.clipboard.writeText(code);
     setCopiedIcon(`${category}-${iconName}`);
     setTimeout(() => setCopiedIcon(null), 2000);
@@ -282,7 +282,7 @@ function IconsPageContent() {
                 Import all
               </h3>
               <pre className="rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400 overflow-x-auto">
-                <code>{`import { Oxycons } from '@endo/oxycons'
+                <code>{`import { Oxycons } from '@onimuxha/oxycons'
 
 <Oxycons.React size={24} />
 <Oxycons.Figma size={24} />`}</code>
@@ -293,7 +293,7 @@ function IconsPageContent() {
                 By category
               </h3>
               <pre className="rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400 overflow-x-auto">
-                <code>{`import { Programming, Framework } from '@endo/oxycons'
+                <code>{`import { Programming, Framework } from '@onimuxha/oxycons'
 
 <Programming.Html size={24} />
 <Framework.React size={24} />`}</code>
@@ -304,7 +304,7 @@ function IconsPageContent() {
           <div className="mt-8 rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
             <h3 className="text-sm font-semibold text-white mb-3">Install</h3>
             <pre className="font-mono text-sm text-zinc-400">
-              npm install @endo/oxycons
+              npm install @onimuxha/oxycons
             </pre>
           </div>
         </section>

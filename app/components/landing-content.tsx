@@ -60,7 +60,7 @@ export function LandingContent() {
               Browse Icons
             </Link>
             <span className="inline-flex h-12 items-center rounded-sm border border-zinc-700 bg-zinc-900/50 px-6 font-mono text-sm text-zinc-400">
-              npm install @endo/oxycons
+              npm install @onimuxha/oxycons
             </span>
           </motion.div>
         </div>
@@ -127,7 +127,7 @@ export function LandingContent() {
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            <pre>{`import { Oxycons } from '@endo/oxycons'
+            <pre>{`import { Oxycons } from '@onimuxha/oxycons'
 
 <Oxycons.React size={24} />
 <Oxycons.Figma size={32} className="text-violet-400" />`}</pre>

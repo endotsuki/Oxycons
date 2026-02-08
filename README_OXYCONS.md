@@ -1,4 +1,4 @@
-# @endo/oxycons
+# @onimuxha/oxycons
 
 A modern, comprehensive icon library for React applications. Oxycons provides a collection of beautifully designed, scalable SVG icons with full TypeScript support and zero dependencies.
 
@@ -18,19 +18,19 @@ A modern, comprehensive icon library for React applications. Oxycons provides a 
 ### npm
 
 ```bash
-npm install @endo/oxycons
+npm install @onimuxha/oxycons
 ```
 
 ### yarn
 
 ```bash
-yarn add @endo/oxycons
+yarn add @onimuxha/oxycons
 ```
 
 ### pnpm
 
 ```bash
-pnpm add @endo/oxycons
+pnpm add @onimuxha/oxycons
 ```
 
 ## Quick Start
@@ -38,7 +38,7 @@ pnpm add @endo/oxycons
 ### Basic Usage
 
 ```tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 export function MyComponent() {
   return (
@@ -47,36 +47,36 @@ export function MyComponent() {
       <OxyIcons.search size={20} />
       <OxyIcons.user />
     </div>
-  )
+  );
 }
 ```
 
 ### Using Individual Icons
 
 ```tsx
-import { createIcon } from '@endo/oxycons'
-import { ICON_DATA } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
+import { ICON_DATA } from "@onimuxha/oxycons";
 
-const HomeIcon = createIcon(ICON_DATA.home)
+const HomeIcon = createIcon(ICON_DATA.home);
 
 export function MyComponent() {
-  return <HomeIcon size={24} />
+  return <HomeIcon size={24} />;
 }
 ```
 
 ### Custom Styling
 
 ```tsx
-import OxyIcons from '@endo/oxycons'
+import OxyIcons from "@onimuxha/oxycons";
 
 export function MyComponent() {
   return (
-    <OxyIcons.home 
-      size={24} 
+    <OxyIcons.home
+      size={24}
       className="text-blue-500 hover:text-blue-700 transition-colors"
       aria-label="Go to home page"
     />
-  )
+  );
 }
 ```
 
@@ -89,19 +89,20 @@ All icons are React components that accept the following props:
 ```typescript
 interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   /** Size of the icon in pixels */
-  size?: number | string
+  size?: number | string;
   /** Whether the icon is filled */
-  filled?: boolean
+  filled?: boolean;
   /** Custom CSS class for styling */
-  className?: string
+  className?: string;
   /** ARIA label for accessibility */
-  'aria-label'?: string
+  "aria-label"?: string;
 }
 ```
 
 ### Available Icons
 
 #### Navigation
+
 - `menu` - Hamburger menu icon
 - `arrow-right` - Right arrow
 - `arrow-left` - Left arrow
@@ -114,6 +115,7 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
 - `home` - Home icon
 
 #### Actions
+
 - `search` - Search/magnifier icon
 - `close` - Close/X icon
 - `check` - Checkmark icon
@@ -125,6 +127,7 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
 - `upload` - Upload icon
 
 #### Status & Feedback
+
 - `alert` - Alert/warning icon
 - `alert-circle` - Alert circle icon
 - `info` - Info icon
@@ -132,31 +135,37 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
 - `error` - Error icon
 
 #### Communication
+
 - `message` - Message/chat icon
 - `mail` - Mail/email icon
 - `phone` - Phone/call icon
 
 #### Media & Files
+
 - `image` - Image/photo icon
 - `file` - File/document icon
 - `folder` - Folder/directory icon
 
 #### Commerce
+
 - `shopping-cart` - Shopping cart icon
 - `credit-card` - Credit card icon
 - `dollar` - Dollar/money icon
 
 #### Time
+
 - `calendar` - Calendar icon
 - `clock` - Clock/time icon
 
 #### User & Account
+
 - `user` - User/profile icon
 - `users` - Users/team icon
 - `settings` - Settings/gear icon
 - `bell` - Bell/notification icon
 
 #### Utility
+
 - `help` - Help/question icon
 - `external-link` - External link icon
 - `eye` - Eye/visibility icon
@@ -171,9 +180,9 @@ interface IconProps extends React.SVGAttributes<SVGSVGElement> {
 Search for icons by keyword.
 
 ```tsx
-import { searchIcons } from '@endo/oxycons'
+import { searchIcons } from "@onimuxha/oxycons";
 
-const arrowIcons = searchIcons('arrow')
+const arrowIcons = searchIcons("arrow");
 // Returns all icons with 'arrow' in name or keywords
 ```
 
@@ -182,9 +191,9 @@ const arrowIcons = searchIcons('arrow')
 Get all icons in a specific category.
 
 ```tsx
-import { getIconsByCategory } from '@endo/oxycons'
+import { getIconsByCategory } from "@onimuxha/oxycons";
 
-const navigationIcons = getIconsByCategory('navigation')
+const navigationIcons = getIconsByCategory("navigation");
 ```
 
 #### `getCategories(): string[]`
@@ -192,9 +201,9 @@ const navigationIcons = getIconsByCategory('navigation')
 Get all available icon categories.
 
 ```tsx
-import { getCategories } from '@endo/oxycons'
+import { getCategories } from "@onimuxha/oxycons";
 
-const categories = getCategories()
+const categories = getCategories();
 // Returns: ['navigation', 'action', 'status', ...]
 ```
 
@@ -203,9 +212,9 @@ const categories = getCategories()
 Get all available icon names.
 
 ```tsx
-import { getIconNames } from '@endo/oxycons'
+import { getIconNames } from "@onimuxha/oxycons";
 
-const allIcons = getIconNames()
+const allIcons = getIconNames();
 // Returns: ['home', 'search', 'user', ...]
 ```
 
@@ -214,18 +223,18 @@ const allIcons = getIconNames()
 Create a custom icon component from metadata.
 
 ```tsx
-import { createIcon } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
 
 const CustomIcon = createIcon({
-  name: 'custom',
-  viewBox: '0 0 24 24',
-  path: 'M12 2L2 20h20L12 2z',
-  categories: ['custom'],
-  keywords: ['custom', 'triangle']
-})
+  name: "custom",
+  viewBox: "0 0 24 24",
+  path: "M12 2L2 20h20L12 2z",
+  categories: ["custom"],
+  keywords: ["custom", "triangle"],
+});
 
 export function MyComponent() {
-  return <CustomIcon size={24} />
+  return <CustomIcon size={24} />;
 }
 ```
 
@@ -234,7 +243,7 @@ export function MyComponent() {
 Create multiple icon components at once.
 
 ```tsx
-import { createIcons } from '@endo/oxycons'
+import { createIcons } from '@onimuxha/oxycons'
 
 const myIcons = createIcons({
   custom1: {...},
@@ -255,6 +264,7 @@ npm run generate:icons
 ```
 
 This will automatically:
+
 1. Extract path data from your SVG files
 2. Generate TypeScript icon definitions
 3. Create pre-built icon components
@@ -264,15 +274,15 @@ This will automatically:
 Create icons programmatically:
 
 ```tsx
-import { createIcon } from '@endo/oxycons'
+import { createIcon } from "@onimuxha/oxycons";
 
 const MyIcon = createIcon({
-  name: 'my-icon',
-  viewBox: '0 0 24 24',
-  path: 'M12 2L2 20h20L12 2z',
-  categories: ['custom'],
-  keywords: ['custom', 'icon']
-})
+  name: "my-icon",
+  viewBox: "0 0 24 24",
+  path: "M12 2L2 20h20L12 2z",
+  categories: ["custom"],
+  keywords: ["custom", "icon"],
+});
 ```
 
 ## Theming
@@ -305,10 +315,7 @@ Icons inherit color from their parent's `color` property. Style them using Tailw
 All icons support ARIA labels for better accessibility:
 
 ```tsx
-<OxyIcons.home 
-  size={24} 
-  aria-label="Navigate to home page"
-/>
+<OxyIcons.home size={24} aria-label="Navigate to home page" />
 ```
 
 For decorative icons, omit the `aria-label`:
@@ -363,10 +370,10 @@ Follow these steps to publish a new version of the package to the npm registry.
 
 1. Verify `package.json`:
 
-  - Ensure `name` is correct and unique (e.g. `@your-scope/oxycons` or `oxycons`).
-  - Ensure `private` is `false`.
-  - Ensure `main`, `module`, and `types` (if TypeScript) point to the build output.
-  - Ensure `files` or `.npmignore` include the built `lib/` (or `dist/`) output.
+- Ensure `name` is correct and unique (e.g. `@your-scope/oxycons` or `oxycons`).
+- Ensure `private` is `false`.
+- Ensure `main`, `module`, and `types` (if TypeScript) point to the build output.
+- Ensure `files` or `.npmignore` include the built `lib/` (or `dist/`) output.
 
 2. Build the package:
 
@@ -424,11 +431,12 @@ Notes:
 
 ## License
 
-MIT © 2024 Endo Design
+MIT © 2024 onimuxha Design
 
 ## Changelog
 
 ### v1.0.0 (Initial Release)
+
 - Initial release with 50+ icons
 - TypeScript support
 - Icon search and categorization
@@ -437,9 +445,9 @@ MIT © 2024 Endo Design
 
 ## Support
 
-- 📖 [Documentation](https://github.com/endo-design/oxycons)
-- 🐛 [Issue Tracker](https://github.com/endo-design/oxycons/issues)
-- 💬 [Discussions](https://github.com/endo-design/oxycons/discussions)
+- 📖 [Documentation](https://github.com/onimuxha-design/oxycons)
+- 🐛 [Issue Tracker](https://github.com/onimuxha-design/oxycons/issues)
+- 💬 [Discussions](https://github.com/onimuxha-design/oxycons/discussions)
 
 ## FAQ
 
@@ -454,6 +462,7 @@ Absolutely! You can customize the SVG paths and create your own icon variants.
 ### How do I add icons to my project?
 
 You can either:
+
 1. Place SVG files in `public/icons/` and run `npm run generate:icons`
 2. Create custom icons programmatically using `createIcon()`
 
@@ -471,4 +480,4 @@ Yes! The library is designed to be tree-shakeable. Only import the icons you nee
 
 ---
 
-Made with ❤️ by Endo Design
+Made with ❤️ by onimuxha Design

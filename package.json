@@ -23,7 +23,7 @@
     "design-system"
   ],
   "files": [
-    "lib/icons",
+    "lib",
     "README.md",
     "LICENSE"
   ],
@@ -31,14 +31,16 @@
   "types": "./lib/icons/index.ts",
   "exports": {
     ".": {
-      "types": "./lib/icons/index.ts",
-      "default": "./lib/icons/index.ts"
+      "import": "./lib/icons/index.ts",
+      "types": "./lib/icons/index.ts"
     },
     "./icons": {
-      "default": "./lib/icons/icons.ts"
+      "import": "./lib/icons/icons.ts",
+      "types": "./lib/icons/icons.ts"
     },
     "./data": {
-      "default": "./lib/icons/data.ts"
+      "import": "./lib/icons/data.ts",
+      "types": "./lib/icons/data.ts"
     }
   },
   "scripts": {
