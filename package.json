@@ -48,6 +48,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "build:static": "next build && next export",
     "lib:build": "tsc -p tsconfig.lib.json",
     "prepublishOnly": "npm run lib:build",
     "generate:icons": "node scripts/generate-icons.js",
