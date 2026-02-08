@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { CATEGORIES, getCategoryInfo } from '@/lib/icons/categories-info';
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { CATEGORIES, getCategoryInfo } from "@/lib/icons/categories-info";
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,7 +32,7 @@ export function LandingContent() {
             Icon library
           </motion.p>
           <motion.h1
-            className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl"
+            className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
@@ -72,7 +72,7 @@ export function LandingContent() {
           className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.4 }}
         >
           Categories
@@ -82,7 +82,7 @@ export function LandingContent() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, margin: "-80px" }}
         >
           {CATEGORIES.map((slug) => {
             const info = getCategoryInfo(slug);
@@ -95,7 +95,9 @@ export function LandingContent() {
                   <h2 className="text-xl font-semibold text-white group-hover:text-white">
                     {info?.name ?? slug}
                   </h2>
-                  <p className="mt-2 text-sm text-zinc-500">{info?.description}</p>
+                  <p className="mt-2 text-sm text-zinc-500">
+                    {info?.description}
+                  </p>
                   <span className="mt-4 inline-block text-sm font-medium text-zinc-400 group-hover:text-white transition-colors">
                     View icons →
                   </span>

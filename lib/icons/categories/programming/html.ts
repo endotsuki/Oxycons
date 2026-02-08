@@ -1,7 +1,7 @@
 import { createIcon } from "../../create-icon";
 
 export const HTML = createIcon({
-  name: "html",
+  name: "HTML",
   viewBox: "0 0 24 24",
   svg: `<svg fill="currentColor">
     <path

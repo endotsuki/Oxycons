@@ -247,7 +247,7 @@ function IconsPageContent() {
                               {name}
                             </span>
                             {isCopied && (
-                              <span className="mt-1 text-xs text-emerald-400">
+                              <span className="mt-1 absolute text-xs text-emerald-400">
                                 Copied
                               </span>
                             )}
@@ -273,24 +273,9 @@ function IconsPageContent() {
 
         {/* Usage */}
         <section className="mt-24 border-t border-zinc-800/80 pt-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-6">
+          <p className="text-xs font-semibold uppercase text-zinc-500 mb-6">
             Usage
           </p>
-          <h2 className="text-2xl font-semibold text-white mb-8">
-            Folder structure &amp; API
-          </h2>
-
-          <div className="rounded-sm border border-zinc-800 bg-black/50 p-6 font-mono text-sm text-zinc-400 overflow-x-auto mb-10">
-            <pre>{`lib/icons/categories/
-├── programming/
-├── app/
-├── design-tools/
-├── ai/
-├── tools/
-├── framework/
-└── index.ts`}</pre>
-          </div>
-
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-sm border border-zinc-800 bg-zinc-900/30 p-6">
               <h3 className="text-sm font-semibold text-white mb-3">
