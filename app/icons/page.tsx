@@ -155,10 +155,10 @@ function IconsPageContent() {
               }}
             >
               {/* Corner decorations */}
-              <span className="absolute -top-1 -left-1 w-4 h-4 border-l-2 border-t-2 border-cyan-400"></span>
-              <span className="absolute -top-1 -right-1 w-4 h-4 border-r-2 border-t-2 border-cyan-400"></span>
-              <span className="absolute -bottom-1 -left-1 w-4 h-4 border-l-2 border-b-2 border-cyan-400"></span>
-              <span className="absolute -bottom-1 -right-1 w-4 h-4 border-r-2 border-b-2 border-cyan-400"></span>
+              <span className="absolute -top-1 -left-1 w-4 h-4 border-l-2 border-t-2 border-cyan-400"/>
+              <span className="absolute -top-1 -right-1 w-4 h-4 border-r-2 border-t-2 border-cyan-400"/>
+              <span className="absolute -bottom-1 -left-1 w-4 h-4 border-l-2 border-b-2 border-cyan-400"/>
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 border-r-2 border-b-2 border-cyan-400"/>
             </div>
           </motion.div>
         )}
