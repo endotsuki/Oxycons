@@ -1,0 +1,12 @@
+import { createIcon } from "../../create-icon";
+
+export const Lit = createIcon({
+    name: "Lit",
+    viewBox: "0 0 24 24",
+    svg: `<svg fill="currentColor">
+            <path
+        d="m2.4 9.6l4.8 4.8V24l-4.8-4.8zm4.8-4.8v9.6L12 9.6V0zM12 9.6v9.6l4.8-4.8V4.8zm4.8 4.8V24l4.8-4.8V9.6z" />
+    </svg>`,
+    categories: ["framework"],
+    keywords: ["lit", "web components", "javascript", "html", "css"],
+});
