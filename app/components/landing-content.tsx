@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CATEGORIES, getCategoryInfo } from "@/lib/icons/categories-info";
+import EnergyBeam from "@/components/energy-bean";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,8 +22,11 @@ export function LandingContent() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-zinc-800/80">
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
+      <section className="relative border-b border-zinc-800/80 overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <EnergyBeam className="w-full h-full" />
+        </div>
+        <div className="mx-auto px-6 py-24 sm:py-32 relative z-10">
           <motion.p
             className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-6"
             initial={{ opacity: 0, y: 8 }}
@@ -32,12 +36,12 @@ export function LandingContent() {
             Icon library
           </motion.p>
           <motion.h1
-            className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl"
+            className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-8xl max-w-4xl"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            The icon library for the modern web.
+            The icon library for modern web.
           </motion.h1>
           <motion.p
             className="mt-6 max-w-2xl text-lg text-zinc-400"
@@ -67,7 +71,7 @@ export function LandingContent() {
       </section>
 
       {/* Categories grid */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
+      <section className="mx-auto px-6 py-24">
         <motion.p
           className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-8"
           initial={{ opacity: 0 }}
@@ -110,7 +114,7 @@ export function LandingContent() {
 
       {/* Code strip */}
       <section className="border-t border-zinc-800/80 bg-zinc-950/50">
-        <div className="mx-auto max-w-7xl px-6 py-16">
+        <div className="mx-auto px-6 py-16">
           <motion.p
             className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500 mb-6"
             initial={{ opacity: 0 }}
@@ -137,7 +141,7 @@ export function LandingContent() {
 
       {/* Footer */}
       <footer className="border-t border-zinc-800/80">
-        <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="mx-auto px-6 py-12">
           <p className="text-sm text-zinc-500">
             Oxycons · Organized icon library for modern applications
           </p>

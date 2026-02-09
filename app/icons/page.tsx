@@ -105,7 +105,7 @@ function IconsPageContent() {
 
   return (
     <div className="min-h-screen border-t border-zinc-800/80">
-      <div className="mx-auto max-w-7xl px-6 py-12">
+      <div className="mx-auto px-6 py-12">
         {/* Hero block */}
         <motion.div
           className="mb-16"
@@ -183,7 +183,7 @@ function IconsPageContent() {
                         : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white"
                     }`}
                   >
-                    {info?.name ?? category}{' '}({iconsByCategory[category]?.length ?? 0})
+                    {info?.name ?? category}{' '}<span className="text-xs text-sky-500">({iconsByCategory[category]?.length ?? 0})</span>
                   </button>
                 );
               })}
@@ -213,11 +213,11 @@ function IconsPageContent() {
                     </p>
                   </div>
                   <motion.div
-                    className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+                    className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-12"
                     variants={staggerContainer}
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: "-20px" }}
+                    viewport={{ once: false, margin: "-20px" }}
                   >
                     {icons.map(({ name, component: IconComponent }) => {
                       const iconId = `${category}-${name}`;

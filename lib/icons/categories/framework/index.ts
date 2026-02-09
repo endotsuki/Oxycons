@@ -1,9 +1,14 @@
+export { AMP } from "./amp";
 export { ActivityPubRocks } from "./activity-pub-rocks";
 export { Actix } from "./actix";
 export { AdonisJS } from "./adonisjs";
 export { Airbyte } from "./airbyte";
+export { AlpineJS } from "./alpinejs";
+export { Android } from "./android";
+export { AndroidStudio } from "./android-studio";
 export { Angular } from "./angular";
 export { AngularJS } from "./angularjs";
+export { AnimeJS } from "./animejs";
 export { NodeJS } from "./nodejs";
 export { ReactJS } from "./react";
 export { VueJS } from "./vue";

@@ -1,8 +1,16 @@
 export { AegisAuthenticator } from "./aegis-authenticator";
 export { Aiqfome } from "./aiqfome";
+export { Akaunting } from "./akaunting";
+export { Akiflow } from "./akiflow";
+export { Alby } from "./alby";
+export { Alfred } from "./alfred";
+export { Alipay } from "./alipay";
+export { Alist } from "./alist";
+export { AndroidAuto } from "./android-auto";
 export { AppleNews } from "./applenews";
 export { Behance } from "./behance";
 export { Facebook } from "./facebook";
+export { IconName } from "./ani-list";
 export { LinkedIn } from "./linkedin";
 export { Messenger } from "./messenger";
 export { Telegram } from "./telegram";
