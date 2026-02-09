@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo, useEffect, Suspense } from "react";
+import { useState, useMemo, useEffect, Suspense, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import {
   CATEGORIES,
@@ -30,6 +30,13 @@ function IconsPageContent() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
+  const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+  const [hoverRect, setHoverRect] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     if (categoryFromUrl && CATEGORIES.includes(categoryFromUrl)) {
@@ -38,7 +45,6 @@ function IconsPageContent() {
   }, [categoryFromUrl]);
 
   const iconsByCategory = useMemo(() => {
-    // Use registry helper to get raw category arrays (values)
     const raw = getIconsByCategory();
 
     const result: Record<string, { name: string; component: any }[]> = {};
@@ -50,16 +56,13 @@ function IconsPageContent() {
       if (!result[category]) return;
       components.forEach((item: any) => {
         if (!item) return;
-        // Registry now returns { name, component } items
         const exportName =
           item.name ||
           (item.component &&
             (item.component.displayName || item.component.name));
         const component = item.component || item;
 
-        // Prefer the export/const name (what you asked for)
         let name = String(exportName || "icon").replace(/Icon$/, "");
-        // Normalize casing: capitalize first letter, keep rest as-is
         name = name.charAt(0).toUpperCase() + name.slice(1);
 
         result[category].push({ name, component });
@@ -98,13 +101,69 @@ function IconsPageContent() {
     setTimeout(() => setCopiedIcon(null), 2000);
   };
 
+  const handleIconHover = (
+    iconId: string,
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    setHoveredIcon(iconId);
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoverRect({
+      x: rect.left,
+      y: rect.top,
+      width: rect.width,
+      height: rect.height,
+    });
+  };
+
+  const handleIconLeave = () => {
+    setHoveredIcon(null);
+  };
+
   const totalIcons = Object.values(iconsByCategory).reduce(
     (sum, icons) => sum + icons.length,
     0,
   );
 
   return (
-    <div className="min-h-screen border-t border-zinc-800/80">
+    <div className="min-h-screen border-t border-zinc-800/80 relative">
+      {/* Page-level hover frame - fixed positioning */}
+      <AnimatePresence>
+        {hoveredIcon && hoverRect && (
+          <motion.div
+            className="fixed pointer-events-none z-50 rounded-sm"
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              left: hoverRect.x,
+              top: hoverRect.y,
+              width: hoverRect.width,
+              height: hoverRect.height,
+            }}
+            exit={{ opacity: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 35,
+              mass: 0.5,
+            }}
+          >
+            <div
+              className="absolute inset-0 rounded-sm border-2 border-cyan-500/70"
+              style={{
+                boxShadow:
+                  "0 0 24px rgba(34, 211, 238, 0.5), inset 0 0 24px rgba(34, 211, 238, 0.15)",
+              }}
+            >
+              {/* Corner decorations */}
+              <span className="absolute -top-1 -left-1 w-4 h-4 border-l-2 border-t-2 border-cyan-400"></span>
+              <span className="absolute -top-1 -right-1 w-4 h-4 border-r-2 border-t-2 border-cyan-400"></span>
+              <span className="absolute -bottom-1 -left-1 w-4 h-4 border-l-2 border-b-2 border-cyan-400"></span>
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 border-r-2 border-b-2 border-cyan-400"></span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="mx-auto px-6 py-12">
         {/* Hero block */}
         <motion.div
@@ -183,7 +242,10 @@ function IconsPageContent() {
                         : "border-zinc-700 bg-zinc-900/50 text-zinc-400 hover:border-zinc-600 hover:text-white"
                     }`}
                   >
-                    {info?.name ?? category}{' '}<span className="text-xs text-sky-500">({iconsByCategory[category]?.length ?? 0})</span>
+                    {info?.name ?? category}{" "}
+                    <span className="text-xs text-sky-500">
+                      ({iconsByCategory[category]?.length ?? 0})
+                    </span>
                   </button>
                 );
               })}
@@ -228,11 +290,14 @@ function IconsPageContent() {
                           variants={staggerItem}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
+                          className="relative"
                         >
                           <button
                             type="button"
                             onClick={() => handleCopyIcon(name, category)}
-                            className="flex w-full flex-col items-center justify-center rounded-sm border border-zinc-800 bg-zinc-900/40 p-6 transition-colors hover:border-zinc-600 hover:bg-zinc-900/80 group"
+                            onMouseEnter={(e) => handleIconHover(iconId, e)}
+                            onMouseLeave={handleIconLeave}
+                            className="flex w-full flex-col items-center justify-center rounded-sm border border-zinc-800 bg-zinc-900/40 p-6 transition-colors hover:border-zinc-600 hover:bg-zinc-900/80 group relative"
                             title={`Copy: ${name}`}
                           >
                             <div className="mb-3 flex h-12 w-12 items-center justify-center">
