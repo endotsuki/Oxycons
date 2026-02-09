@@ -3,6 +3,8 @@ export { CSS } from "./css";
 export { CSS3 } from "./css3";
 export { HTML } from "./html";
 export { JavaScript } from "./java-script";
+export { MySQL } from "./my-sql";
 export { PHP } from "./php";
+export { PostgreSQL } from "./postgre-sql";
 export { Python } from "./python";
 export { TypeScript } from "./typescript";
