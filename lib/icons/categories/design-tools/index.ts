@@ -4,6 +4,7 @@ export { AdobeFonts } from "./adobe-fonts";
 export { AfterEffect } from "./after-effect";
 export { Altium } from "./altium";
 export { Audition } from "./audition";
+export { Canva } from "./canva";
 export { CreativeCloud } from "./creative-cloud";
 export { Dreamweaver } from "./dreamweaver";
 export { Figma } from "./figma";

@@ -1,4 +1,4 @@
-export * as Programming from './programming';
+export * as Programming from './framework/programming';
 export * as App from './app';
 export * as DesignTools from './design-tools';
 export * as AI from './ai';

@@ -38,9 +38,11 @@ export default function RootLayout({
           <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors"
+              className="text-lg flex font-semibold tracking-tight text-white hover:text-zinc-300 transition-colors"
             >
               <img src="/wordmark.svg" alt="Oxycons" className="h-5 w-auto" />
+              {/* beta */}
+              <p className="text-xs text-zinc-500 ml-2">beta</p>
             </Link>
             <nav className="flex items-center gap-8">
               <Link
