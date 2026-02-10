@@ -1,61 +1,55 @@
 import React, { useEffect, useRef } from 'react';
 
 interface EnergyBeamProps {
-    projectId?: string;
-    className?: string;
+  projectId?: string;
+  className?: string;
 }
 
 declare global {
-    interface Window {
-        UnicornStudio?: any;
-    }
+  interface Window {
+    UnicornStudio?: any;
+  }
 }
 
-const EnergyBeam: React.FC<EnergyBeamProps> = ({
-    projectId = "hRFfUymDGOHwtFe7evR2",
-    className = ""
-}) => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const scriptLoadedRef = useRef(false);
+const EnergyBeam: React.FC<EnergyBeamProps> = ({ projectId = 'hRFfUymDGOHwtFe7evR2', className = '' }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const initializedRef = useRef(false);
 
-    useEffect(() => {
-        const loadScript = () => {
-            if (scriptLoadedRef.current) return;
+  useEffect(() => {
+    if (initializedRef.current) return;
 
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.5.2/dist/unicornStudio.umd.js';
-            script.async = true;
+    const initUnicorn = () => {
+      if (!window.UnicornStudio || !containerRef.current) return;
 
-            script.onload = () => {
-                scriptLoadedRef.current = true;
-                if (window.UnicornStudio && containerRef.current) {
-                    console.log('Unicorn Studio loaded, initializing project...');
-                    // Initialize the Unicorn Studio project
-                    window.UnicornStudio.init();
-                }
-            };
+      window.UnicornStudio.init();
+      initializedRef.current = true;
+    };
 
-            document.head.appendChild(script);
+    if (window.UnicornStudio) {
+      initUnicorn();
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.5.2/dist/unicornStudio.umd.js';
+      script.async = true;
 
-            return () => {
-                if (script.parentNode) {
-                    script.parentNode.removeChild(script);
-                }
-            };
-        };
+      script.onload = initUnicorn;
+      document.head.appendChild(script);
+    }
 
-        loadScript();
-    }, [projectId]);
+    return () => {
+      // 🚨 IMPORTANT: stop animation when leaving page
+      if (window.UnicornStudio?.destroy) {
+        window.UnicornStudio.destroy();
+        initializedRef.current = false;
+      }
+    };
+  }, [projectId]);
 
-    return (
-        <div className={`relative w-full h-screen bg-black overflow-hidden ${className}`}>
-            <div
-                ref={containerRef}
-                data-us-project={projectId}
-                className="w-full h-full"
-            />
-        </div>
-    );
+  return (
+    <div className={`relative h-screen w-full overflow-hidden ${className}`}>
+      <div ref={containerRef} data-us-project={projectId} className='absolute inset-0' />
+    </div>
+  );
 };
 
 export default EnergyBeam;
