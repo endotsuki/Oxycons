@@ -29,7 +29,7 @@ export default function SearchAndFilters({
           placeholder='Search icons...'
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className='h-12 max-w-md rounded-sm border-zinc-700 bg-zinc-900/50 text-white placeholder:text-zinc-500 focus-visible:ring-zinc-500'
+          className='h-12 max-w-md rounded-sm border-zinc-700 bg-zinc-900/50 text-white placeholder:text-zinc-500'
         />
       </div>
 

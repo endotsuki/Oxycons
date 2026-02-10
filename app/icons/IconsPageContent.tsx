@@ -59,7 +59,22 @@ export default function IconsPageContent() {
     Object.entries(iconsByCategory).forEach(([category, icons]) => {
       if (categoryToShow && category !== categoryToShow) return;
 
-      const matchingIcons = icons.filter((icon) => icon.name.toLowerCase().includes(searchQuery.toLowerCase()));
+      const q = searchQuery.toLowerCase();
+      const matchingIcons = icons.filter((icon) => {
+        if (!q) return true;
+        // match against the display name
+        if (icon.name.toLowerCase().includes(q)) return true;
+
+        // match against metadata keywords (if present)
+        const meta = (icon.component as any)?.metadata;
+        if (meta && Array.isArray(meta.keywords)) {
+          for (const kw of meta.keywords) {
+            if (String(kw).toLowerCase().includes(q)) return true;
+          }
+        }
+
+        return false;
+      });
 
       if (matchingIcons.length > 0) {
         filtered.push({ category, icons: matchingIcons });

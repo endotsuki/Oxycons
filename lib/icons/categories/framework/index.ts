@@ -14,6 +14,7 @@ export { Django } from "./django";
 export { Electron } from "./electron";
 export { ExpressJS } from "./expressjs";
 export { Framer } from "./framer";
+export { Framework7 } from "./framework7";
 export { GraphQl } from "./graph-ql";
 export { HeadlessUI } from "./headless-ui";
 export { Jest } from "./jest";

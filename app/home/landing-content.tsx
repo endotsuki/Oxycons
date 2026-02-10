@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CATEGORIES, getCategoryInfo } from '@/lib/icons/categories-info';
-import EnergyBeam from '@/components/energy-beam';
+import LightPillar from '@/components/LightPillar';
 
 const container = {
   hidden: { opacity: 0 },
@@ -23,9 +23,22 @@ export function LandingContent() {
     <>
       {/* Hero */}
       <section className='relative overflow-hidden border-b border-zinc-800/80'>
-        {/* <div className='absolute inset-0 -z-10'>
-          <EnergyBeam className='h-full w-full' />
-        </div> */}
+        <div className='absolute inset-0 -z-10'>
+          <LightPillar
+            topColor='#5227FF'
+            bottomColor='#FF9FFC'
+            intensity={1.3}
+            rotationSpeed={1}
+            glowAmount={0.003}
+            pillarWidth={3}
+            pillarHeight={0.4}
+            noiseIntensity={0}
+            pillarRotation={30}
+            interactive={false}
+            mixBlendMode='screen'
+            quality='high'
+          />
+        </div>
         <div className='relative z-10 mx-auto px-6 py-24 sm:py-32'>
           <motion.p
             className='mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'
