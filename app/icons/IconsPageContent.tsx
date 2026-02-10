@@ -4,8 +4,6 @@ import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CATEGORIES, getIconsByCategory, Oxycons } from '@/lib/icons/registry';
-import Lottie from 'lottie-react';
-import Fire from '../fire.json';
 import SearchAndFilters from './SearchAndFilters';
 import IconsGrid from './IconsGrid';
 import EmptyState from './EmptyState';
@@ -93,14 +91,6 @@ export default function IconsPageContent() {
         <motion.div className='mb-16' initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <p className='mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'>Browse</p>
           <h1 className='flex items-center text-4xl font-bold tracking-tight text-white sm:text-5xl'>
-            <Lottie
-              animationData={Fire}
-              style={{ width: 48, height: 48 }}
-              autoplay
-              rendererSettings={{
-                preserveAspectRatio: 'xMidYMid slice',
-              }}
-            />
             Oxycons
           </h1>
           <p className='mt-4 max-w-xl text-lg text-zinc-400'>Click an icon to copy the import and component code.</p>

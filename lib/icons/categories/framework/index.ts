@@ -33,4 +33,5 @@ export { Swagger } from "./swagger";
 export { Tailwind } from "./tailwind";
 export { ThreeJS } from "./threejs";
 export { Vite } from "./vite";
+export { Vitest } from "./vitest";
 export { VueJS } from "./vue";
