@@ -1,5 +1,5 @@
-import { LandingContent } from './components/landing-content'
+import { LandingContent } from './home/landing-content';
 
 export default function HomePage() {
-  return <LandingContent />
+  return <LandingContent />;
 }
