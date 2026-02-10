@@ -10,7 +10,7 @@
  * This script:
  * 1. Scans SVG files from input directory
  * 2. Extracts path data and metadata
- * 3. Generates TypeScript icon definitions
+ * 3. Generates TypeScript icon definitions with paths array
  * 4. Creates pre-built icon components
  */
 
@@ -19,29 +19,46 @@ const path = require('path');
 
 // Configuration
 const config = {
-  inputDir: process.argv.includes('--input')
-    ? process.argv[process.argv.indexOf('--input') + 1]
-    : './public/icons',
-  outputDir: process.argv.includes('--output')
-    ? process.argv[process.argv.indexOf('--output') + 1]
-    : './lib/icons',
+  inputDir: process.argv.includes('--input') ? process.argv[process.argv.indexOf('--input') + 1] : './public/icons',
+  outputDir: process.argv.includes('--output') ? process.argv[process.argv.indexOf('--output') + 1] : './lib/icons',
   dataFile: 'generated-icons.ts',
   verbose: process.argv.includes('--verbose'),
 };
 
 /**
  * Extract SVG path data from SVG file content
+ * Returns array of path objects with their properties
  */
 function extractSvgData(svgContent) {
   const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
   const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
 
-  // Extract path elements
-  const pathMatches = svgContent.match(/<path[^>]*d="([^"]+)"[^>]*>/g) || [];
-  const paths = pathMatches.map((match) => {
-    const dataMatch = match.match(/d="([^"]+)"/);
-    return dataMatch ? dataMatch[1] : '';
-  });
+  // Extract all path elements with their attributes
+  const pathMatches = svgContent.match(/<path[^>]*>/g) || [];
+  const paths = pathMatches
+    .map((match) => {
+      const pathObj = {};
+
+      // Extract d attribute (required)
+      const dMatch = match.match(/d="([^"]+)"/);
+      if (!dMatch) return null;
+      pathObj.d = dMatch[1];
+
+      // Extract optional fill attribute
+      const fillMatch = match.match(/fill="([^"]+)"/);
+      if (fillMatch) pathObj.fill = fillMatch[1];
+
+      // Extract optional opacity attribute
+      const opacityMatch = match.match(/opacity="([^"]+)"/);
+      if (opacityMatch) pathObj.opacity = parseFloat(opacityMatch[1]);
+
+      // Extract optional fill-opacity attribute
+      const fillOpacityMatch = match.match(/fill-opacity="([^"]+)"/);
+      if (fillOpacityMatch) pathObj.fillOpacity = parseFloat(fillOpacityMatch[1]);
+
+      return pathObj;
+    })
+    .filter(Boolean);
 
   return {
     viewBox,
@@ -62,7 +79,7 @@ function generateIconName(filename) {
 }
 
 /**
- * Generate icon metadata object
+ * Generate icon metadata object with paths array
  */
 function generateIconMetadata(filename, svgPath) {
   const svgContent = fs.readFileSync(svgPath, 'utf8');
@@ -77,10 +94,23 @@ function generateIconMetadata(filename, svgPath) {
   return {
     name: iconName,
     viewBox: svgData.viewBox,
-    path: svgData.paths[0], // Use first path
+    paths: svgData.paths, // Array of path objects with properties
     categories: ['custom'],
     keywords: [iconName],
   };
+}
+
+/**
+ * Convert path data object to TypeScript code
+ */
+function formatPathData(pathData) {
+  const parts = [`d: '${pathData.d}'`];
+
+  if (pathData.fill) parts.push(`fill: '${pathData.fill}'`);
+  if (pathData.opacity !== undefined) parts.push(`opacity: ${pathData.opacity}`);
+  if (pathData.fillOpacity !== undefined) parts.push(`fillOpacity: ${pathData.fillOpacity}`);
+
+  return `{ ${parts.join(', ')} }`;
 }
 
 /**
@@ -89,10 +119,14 @@ function generateIconMetadata(filename, svgPath) {
 function generateTypeScriptCode(icons) {
   const iconObjects = icons
     .map((icon) => {
+      const pathsCode = icon.paths.map((p) => formatPathData(p)).join(',\n      ');
+
       return `  '${icon.name}': {
     name: '${icon.name}',
     viewBox: '${icon.viewBox}',
-    path: '${icon.path}',
+    paths: [
+      ${pathsCode}
+    ],
     categories: ${JSON.stringify(icon.categories)},
     keywords: ${JSON.stringify(icon.keywords)},
   }`;
@@ -126,17 +160,13 @@ async function main() {
 
     // Check if input directory exists
     if (!fs.existsSync(config.inputDir)) {
-      console.log(
-        `📁 Input directory not found: ${config.inputDir}`
-      );
+      console.log(`📁 Input directory not found: ${config.inputDir}`);
       console.log('   Create this directory and add SVG files to auto-generate icons.\n');
       return;
     }
 
     // Read SVG files
-    const svgFiles = fs
-      .readdirSync(config.inputDir)
-      .filter((f) => f.endsWith('.svg'));
+    const svgFiles = fs.readdirSync(config.inputDir).filter((f) => f.endsWith('.svg'));
 
     if (svgFiles.length === 0) {
       console.log(`No SVG files found in ${config.inputDir}`);
@@ -153,7 +183,7 @@ async function main() {
         const metadata = generateIconMetadata(filename, svgPath);
         if (metadata) {
           icons.push(metadata);
-          console.log(`✓ ${filename} → ${metadata.name}`);
+          console.log(`✓ ${filename} → ${metadata.name} (${metadata.paths.length} path${metadata.paths.length > 1 ? 's' : ''})`);
         }
       } catch (error) {
         console.error(`✗ Error processing ${filename}: ${error.message}`);
@@ -180,7 +210,7 @@ async function main() {
     if (config.verbose) {
       console.log('Generated icons:');
       icons.forEach((icon) => {
-        console.log(`  - ${icon.name}`);
+        console.log(`  - ${icon.name} (${icon.paths.length} path${icon.paths.length > 1 ? 's' : ''})`);
       });
       console.log();
     }

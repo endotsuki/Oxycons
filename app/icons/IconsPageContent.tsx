@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { CATEGORIES, getIconsByCategory } from '@/lib/icons/registry';
+import { CATEGORIES, getIconsByCategory, Oxycons } from '@/lib/icons/registry';
 import Lottie from 'lottie-react';
 import Fire from '../fire.json';
 import SearchAndFilters from './SearchAndFilters';

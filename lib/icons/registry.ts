@@ -1,13 +1,15 @@
-import * as Programming from "./categories/programming";
-import * as App from "./categories/app";
-import * as DesignTools from "./categories/design-tools";
-import * as AI from "./categories/ai";
-import * as Tools from "./categories/tools";
-import * as Framework from "./categories/framework";
-import * as Company from "./categories/company";
+import React from 'react';
+import * as Programming from './categories/programming';
+import * as App from './categories/app';
+import * as DesignTools from './categories/design-tools';
+import * as AI from './categories/ai';
+import * as Tools from './categories/tools';
+import * as Framework from './categories/framework';
+import * as Company from './categories/company';
+import type { IconProps } from './types';
 
 // Compile all icons from all categories
-export const Oxycons = {
+const iconRegistry = {
   // Programming
   ...Programming,
   // App
@@ -24,6 +26,47 @@ export const Oxycons = {
   ...Company,
 };
 
+/**
+ * Type-safe icon names for autocomplete support
+ */
+export type IconName = keyof typeof iconRegistry;
+
+/**
+ * Component props for dynamic Oxycons usage
+ */
+export interface OxyconsProps extends IconProps {
+  /** Icon name to render - supports autocomplete for all available icons */
+  name?: IconName;
+}
+
+/**
+ * Dynamic Oxycons component wrapper
+ * Supports both dynamic (name prop) and dot notation (component.key) usage
+ */
+const OxyconsComponent = React.forwardRef<SVGSVGElement, OxyconsProps>(({ name, ...props }, ref) => {
+  if (!name) {
+    console.warn('Oxycons: name prop is required when using dynamic rendering');
+    return null;
+  }
+
+  const IconComponent = (iconRegistry as any)[name] as React.ComponentType<IconProps>;
+
+  if (!IconComponent) {
+    console.warn(`Oxycons: Icon "${name}" not found in registry`);
+    return null;
+  }
+
+  return React.createElement(IconComponent, props, null);
+});
+
+OxyconsComponent.displayName = 'Oxycons';
+
+/**
+ * Dynamic Oxycons component - use name prop for icon selection
+ * @example <Oxycons name="ReactJS" size={24} className="text-blue-500" />
+ */
+export const Oxycons = OxyconsComponent;
+
 export type OxyconsType = typeof Oxycons;
 
 // Get all icon names
@@ -37,7 +80,7 @@ export const getIconsByCategory = () => {
   const buckets: Record<string, any[]> = {
     programming: [],
     app: [],
-    "design-tools": [],
+    'design-tools': [],
     ai: [],
     tools: [],
     framework: [],
@@ -73,7 +116,7 @@ export const getIconsByCategory = () => {
     }
 
     // Fallback: add to framework by default
-    buckets["framework"].push(item);
+    buckets['framework'].push(item);
   });
 
   return buckets;
@@ -83,32 +126,32 @@ export const getIconsByCategory = () => {
 export const getCategoryInfo = (category: string) => {
   const info: Record<string, { name: string; description: string }> = {
     programming: {
-      name: "Programming",
-      description: "Programming languages and web technologies",
+      name: 'Programming',
+      description: 'Programming languages and web technologies',
     },
     app: {
-      name: "App",
-      description: "Application and device related icons",
+      name: 'App',
+      description: 'Application and device related icons',
     },
-    "design-tools": {
-      name: "Design Tools",
-      description: "Design and creative software icons",
+    'design-tools': {
+      name: 'Design Tools',
+      description: 'Design and creative software icons',
     },
     ai: {
-      name: "AI",
-      description: "Artificial intelligence and machine learning icons",
+      name: 'AI',
+      description: 'Artificial intelligence and machine learning icons',
     },
     tools: {
-      name: "Tools",
-      description: "Development and utility tools icons",
+      name: 'Tools',
+      description: 'Development and utility tools icons',
     },
     framework: {
-      name: "Framework",
-      description: "Web frameworks and libraries icons",
+      name: 'Framework',
+      description: 'Web frameworks and libraries icons',
     },
     company: {
-      name: "Company",
-      description: "Tech companies and brands icons",
+      name: 'Company',
+      description: 'Tech companies and brands icons',
     },
   };
 
@@ -116,12 +159,4 @@ export const getCategoryInfo = (category: string) => {
 };
 
 // All categories
-export const CATEGORIES = [
-  "programming",
-  "app",
-  "design-tools",
-  "ai",
-  "tools",
-  "framework",
-  "company",
-];
+export const CATEGORIES = ['programming', 'app', 'design-tools', 'ai', 'tools', 'framework', 'company'];

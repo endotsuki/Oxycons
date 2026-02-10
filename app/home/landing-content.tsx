@@ -142,8 +142,8 @@ export function LandingContent() {
           >
             <pre>{`import { Oxycons } from '@onimuxha/oxycons'
 
-<Oxycons.React size={24} />
-<Oxycons.Figma size={32} className="text-violet-400" />`}</pre>
+<Oxycons name="ReactJS" size={24} className="text-blue-500" />
+<Oxycons name="ChatGPT" size={32} color="#10a37f" />`}</pre>
           </motion.div>
         </div>
       </section>

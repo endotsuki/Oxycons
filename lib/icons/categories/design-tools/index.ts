@@ -1,6 +1,7 @@
 export { AcrobatReader } from "./acrobat-reader";
 export { Adobe } from "./adobe";
 export { AdobeFonts } from "./adobe-fonts";
+export { Affinity } from "./affinity";
 export { AfterEffect } from "./after-effect";
 export { Altium } from "./altium";
 export { Audition } from "./audition";

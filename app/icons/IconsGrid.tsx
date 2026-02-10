@@ -53,7 +53,8 @@ export default function IconsGrid({ filteredIcons }: IconsGridProps) {
                     onMouseLeave={() => setHovered('')}
                     className='group flex w-full flex-col items-center border border-zinc-800 bg-zinc-900/40 p-6 hover:border-zinc-600 hover:bg-zinc-900/80'
                   >
-                    {Icon && <Icon size={32} className='mb-3 text-zinc-400 group-hover:text-white' />}
+                    {Icon && <Icon size={32} color='#007ACC' className='mb-3 text-zinc-400 group-hover:text-white' />}
+                    {Icon && <Icon size={32} className='mb-3 text-purple-400 group-hover:text-white' />}
                     <span className='w-full truncate text-center text-xs text-zinc-500 group-hover:text-zinc-300'>{name}</span>
                     {copied === id && <span className='absolute text-xs text-emerald-400'>Copied</span>}
                   </button>

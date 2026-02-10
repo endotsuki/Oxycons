@@ -7,8 +7,8 @@ import { IconMetadata, IconProps } from './types';
 /**
  * Create a reusable icon component from icon metadata
  *
- * @param metadata - Icon metadata including SVG path data (single or multiple) or full SVG code
- * @returns A React component that renders the icon with support for size and color customization
+ * @param metadata - Icon metadata with paths array
+ * @returns A React component that renders the icon with full styling support
  *
  * @example
  * ```tsx
@@ -16,12 +16,13 @@ import { IconMetadata, IconProps } from './types';
  * const HomeIcon = createIcon({
  *   name: 'home',
  *   viewBox: '0 0 24 24',
- *   path: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+ *   paths: [{ d: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z' }],
  *   categories: ['navigation'],
  * });
  * <HomeIcon size={24} className="text-red-500" />
+ * <HomeIcon size={24} color="#ff0000" />
  *
- * // Multiple paths with properties
+ * // Multiple paths with individual properties
  * const ComplexIcon = createIcon({
  *   name: 'logo',
  *   viewBox: '0 0 100 100',
@@ -31,21 +32,16 @@ import { IconMetadata, IconProps } from './types';
  *   ],
  * });
  *
- * // Full SVG code
- * const LogoIcon = createIcon({
- *   name: 'logo',
- *   viewBox: '0 0 100 100',
- *   svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="#000" d="M10 10h20v20H10z" opacity="0.45" /></svg>',
- * });
- * <HomeIcon size={24} />
+ * // With color prop override
+ * <ComplexIcon color="#ffffff" />
  * ```
  */
 export function createIcon(metadata: IconMetadata) {
   const IconComponent = React.forwardRef<SVGSVGElement, IconProps>((props, ref) => {
-    const { size = 24, className = '', ...restProps } = props;
+    const { size = 24, className = '', color, ...restProps } = props;
     const sizeValue = typeof size === 'number' ? size : parseInt(size as string, 10);
 
-    // Handle full SVG code
+    // Handle legacy full SVG code (backward compatibility)
     if (metadata.svg) {
       return (
         <svg
@@ -55,33 +51,31 @@ export function createIcon(metadata: IconMetadata) {
           width={sizeValue}
           height={sizeValue}
           className={`inline-block ${className}`}
-          style={{ color: 'inherit' }}
+          style={{ color: color || 'inherit' }}
           dangerouslySetInnerHTML={{ __html: metadata.svg }}
           {...restProps}
         />
       );
     }
 
-    // Handle both single path and multiple paths
+    // Handle paths array (preferred approach)
     const hasPaths = metadata.paths && metadata.paths.length > 0;
     const singlePath = metadata.path;
 
     return (
-      <Icon {...props} ref={ref} viewBox={metadata.viewBox || '0 0 24 24'}>
+      <Icon {...props} ref={ref} viewBox={metadata.viewBox || '0 0 24 24'} color={color} className={className} size={sizeValue}>
         {hasPaths ? (
           // Render multiple paths with their individual properties
-          metadata.paths!.map((pathData, index) => (
-            <path
-              key={index}
-              d={pathData.d}
-              fill={pathData.fill || 'currentColor'}
-              stroke={pathData.stroke}
-              fillOpacity={pathData.fillOpacity}
-              strokeOpacity={pathData.strokeOpacity}
-              opacity={pathData.opacity}
-              strokeWidth={pathData.strokeWidth}
-            />
-          ))
+          metadata.paths!.map((pathData, index) => {
+            // Detect if this is a multi-color icon (has different fills)
+            const hasMultipleColors = metadata.paths!.some((p) => p.fill && p.fill !== 'currentColor');
+
+            // Use currentColor by default to respect className/color props
+            // Only use explicit fill for multi-color icons
+            const fill = hasMultipleColors && pathData.fill ? pathData.fill : 'currentColor';
+
+            return <path key={index} d={pathData.d} fill={fill} fillOpacity={pathData.fillOpacity} opacity={pathData.opacity} />;
+          })
         ) : (
           // Render single path
           <path d={singlePath} fill='currentColor' />
@@ -92,9 +86,8 @@ export function createIcon(metadata: IconMetadata) {
 
   IconComponent.displayName = `${metadata.name}Icon`;
 
-  // Attach metadata to the component so the registry can read categories, keywords, etc.
+  // Attach metadata to the component
   try {
-    // Use a non-enumerable property to avoid interfering with React internals
     Object.defineProperty(IconComponent, 'metadata', {
       value: metadata,
       writable: false,
@@ -102,7 +95,6 @@ export function createIcon(metadata: IconMetadata) {
       enumerable: false,
     });
   } catch (e) {
-    // Fallback if defineProperty fails in some environments
     (IconComponent as any).metadata = metadata;
   }
 
@@ -114,15 +106,6 @@ export function createIcon(metadata: IconMetadata) {
  *
  * @param metadataMap - Object mapping icon names to metadata
  * @returns Object with icon components
- *
- * @example
- * ```tsx
- * const icons = createIcons({
- *   home: ICON_DATA.home,
- *   search: ICON_DATA.search,
- * });
- * <icons.home size={24} />
- * ```
  */
 export function createIcons(metadataMap: Record<string, IconMetadata>): Record<string, React.FC<IconProps>> {
   const icons: Record<string, React.FC<IconProps>> = {};

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 /**
  * Oxycons Icon Library Types
  * Core type definitions for the icon system
@@ -11,6 +11,8 @@ export interface IconProps extends React.SVGAttributes<SVGSVGElement> {
   filled?: boolean;
   /** Custom CSS class for styling */
   className?: string;
+  /** Color of the icon - supports hex, rgb, or Tailwind classes (via className) */
+  color?: string;
   /** ARIA label for accessibility */
   'aria-label'?: string;
 }
@@ -20,16 +22,10 @@ export interface PathData {
   d: string;
   /** Fill color for the path */
   fill?: string;
-  /** Stroke color for the path */
-  stroke?: string;
   /** Fill opacity */
   fillOpacity?: number;
-  /** Stroke opacity */
-  strokeOpacity?: number;
   /** Opacity for the entire path */
   opacity?: number;
-  /** Stroke width */
-  strokeWidth?: string | number;
 }
 
 export interface IconMetadata {
@@ -41,7 +37,7 @@ export interface IconMetadata {
   path?: string;
   /** Multiple paths for complex icons */
   paths?: PathData[];
-  /** Full SVG code as a string */
+  /** Full SVG code as a string (legacy support) */
   svg?: string;
   /** Whether the icon has a filled variant */
   hasFilled?: boolean;
