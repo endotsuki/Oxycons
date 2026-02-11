@@ -59,7 +59,7 @@ export default function IconsGrid({ filteredIcons }: IconsGridProps) {
                   </button>
                   {hovered === id && (
                     <div
-                      className='pointer-events-none absolute border border-cyan-500/60'
+                      className='pointer-events-none absolute'
                       style={{
                         left: rect.x,
                         top: rect.y,

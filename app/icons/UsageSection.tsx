@@ -12,8 +12,8 @@ export default function UsageSection() {
         <pre className='overflow-x-auto rounded-sm bg-black/50 p-4 font-mono text-xs text-zinc-400'>
           <code>{`import { Oxycons } from '@onimuxha/oxycons'
 
-<Oxycons.React size={24} />
-<Oxycons.Figma size={24} />`}</code>
+<Oxycons name="ReactJS" size={24} className="text-cyan-400" />
+<Oxycons name="Figma" size={24} color="#874FFF" />`}</code>
         </pre>
       </div>
     </section>
