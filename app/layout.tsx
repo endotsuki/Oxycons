@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
 
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Oxycons',
     description: 'A comprehensive, categorized React icon library. Sharp. Dark. Ready.',
     images: ['/og-image.png'],
