@@ -60,10 +60,8 @@ export default function IconsPageContent() {
       const q = searchQuery.toLowerCase();
       const matchingIcons = icons.filter((icon) => {
         if (!q) return true;
-        // match against the display name
         if (icon.name.toLowerCase().includes(q)) return true;
 
-        // match against metadata keywords (if present)
         const meta = (icon.component as any)?.metadata;
         if (meta && Array.isArray(meta.keywords)) {
           for (const kw of meta.keywords) {
@@ -86,19 +84,25 @@ export default function IconsPageContent() {
 
   return (
     <div className='min-h-screen border-t border-zinc-800/80'>
-      <div className='mx-auto px-6 py-12'>
+      <div className='mx-auto max-w-[1800px] px-8 py-16 lg:px-16 lg:py-20'>
         {/* Hero Section */}
-        <motion.div
-          className='mb-9 border-b-4 border-black'
-          initial={{ opacity: 0, y: 20 }}
+        <motion.h1
+          className='mb-9 max-w-5xl text-7xl font-black uppercase tracking-tight text-white md:text-8xl lg:text-9xl'
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h1 className='mb-6 text-7xl font-black uppercase tracking-tighter md:text-8xl lg:text-9xl'>Oxycons</h1>
-          <p className='max-w-3xl text-xl font-light leading-tight md:text-2xl lg:text-3xl'>
-            {totalIcons} icons organized by category. Click to copy code.
-          </p>
-        </motion.div>
+          <p className='mb-4 text-3xl font-medium leading-tight tracking-tight text-white/30 md:text-4xl lg:text-5xl'>Browse</p>
+          Oxycons
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className='mb-10 max-w-4xl text-2xl font-light leading-relaxed text-white/50 md:text-3xl lg:text-4xl'
+        >
+          Click an icon to copy the import and component code.
+        </motion.p>
 
         {/* Search & Filters */}
         <SearchAndFilters
@@ -109,14 +113,12 @@ export default function IconsPageContent() {
           iconsByCategory={iconsByCategory}
         />
 
-        {/* Icons Grid or Empty State */}
         {filteredIcons.length > 0 ? <IconsGrid filteredIcons={filteredIcons} /> : <EmptyState />}
 
-        {/* Usage Section */}
         <UsageSection />
 
         {/* Footer */}
-        <footer className='mt-20 border-t border-zinc-800/80 py-10 text-center text-sm text-zinc-500'>
+        <footer className='mt-32 border-t border-zinc-800/80 py-12 text-center text-sm text-zinc-500'>
           Oxycons · Organized icon library for modern applications
         </footer>
       </div>
