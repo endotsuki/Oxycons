@@ -45,6 +45,7 @@ export { Meta } from "./meta";
 export { Microsoft } from "./microsoft";
 export { NineGag } from "./9gag";
 export { NineNineDesigns } from "./99designs";
+export { Shopify } from "./shopify";
 export { Tracklists } from "./1001tracklists";
 export { TwoK } from "./2k";
 export { WordPress } from "./wordpress";

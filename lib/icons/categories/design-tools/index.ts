@@ -19,4 +19,5 @@ export { Photoshop } from "./photoshop";
 export { PremierePro } from "./premiere-pro";
 export { SVG } from "./svg";
 export { Sketch } from "./sketch";
+export { Unsplash } from "./unsplash";
 export { XD } from "./xd";
