@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CATEGORIES, getCategoryInfo } from '@/lib/icons/categories-info';
 import LightPillar from '@/components/LightPillar';
+import { Button } from '@/components/ui/button';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
 
 const container = {
   hidden: { opacity: 0 },
@@ -40,29 +43,23 @@ export function LandingContent() {
           />
         </div>
         <div className='relative z-10 mx-auto px-6 py-24 sm:py-32'>
-          <motion.p
-            className='mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            Icon library
-          </motion.p>
+          <p className='mb-3 text-2xl font-medium leading-tight tracking-tight text-white/30 md:text-5xl lg:text-6xl'>Icons library</p>
           <motion.h1
-            className='max-w-4xl text-4xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-8xl'
+            className='max-w-4xl text-5xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-8xl'
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            The icon library for modern web.
+            Icon library for modern web.
           </motion.h1>
           <motion.p
-            className='mt-6 max-w-2xl text-lg text-zinc-400'
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className='mt-6 max-w-4xl text-lg font-light leading-relaxed text-white/50 md:text-2xl lg:text-3xl'
           >
-            Categorized, tree-shakeable React icons. Sharp. Copy-paste ready.
+            Categorized, tree-shakeable React icons. Sharp. Copy-paste ready. Built for developers, designed for everyone. Oxycons is the
+            ultimate icon library for modern web applications.
           </motion.p>
           <motion.div
             className='mt-10 flex flex-wrap gap-4'
@@ -70,11 +67,15 @@ export function LandingContent() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Link
-              href='/icons'
-              className='inline-flex h-12 items-center justify-center rounded-sm bg-white px-8 text-sm font-semibold text-black transition-colors hover:bg-zinc-200'
-            >
-              Browse Icons
+            <Link href='/icons' className='group'>
+              <Button variant='primary' className='hover:bg-zinc-200'>
+                Browse Icons
+                <HugeiconsIcon
+                  icon={ArrowRight02Icon}
+                  size='23'
+                  className='ml-2 transition-transform duration-300 group-hover:translate-x-1 group-hover:scale-110'
+                />
+              </Button>
             </Link>
             <span className='inline-flex h-12 items-center rounded-sm border border-zinc-700 bg-zinc-900/50 px-6 font-mono text-sm text-zinc-400'>
               npm install @onimuxha/oxycons
@@ -85,21 +86,13 @@ export function LandingContent() {
 
       {/* Categories grid */}
       <section className='mx-auto px-6 py-24'>
-        <motion.p
-          className='mb-8 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.4 }}
-        >
-          Categories
-        </motion.p>
+        <p className='mb-3 text-2xl font-medium leading-tight tracking-tight text-white/30 md:text-5xl lg:text-6xl'>Categories</p>
         <motion.div
           className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'
           variants={container}
           initial='hidden'
           whileInView='show'
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: false, margin: '-80px' }}
         >
           {CATEGORIES.map((slug) => {
             const info = getCategoryInfo(slug);
@@ -107,12 +100,19 @@ export function LandingContent() {
               <motion.div key={slug} variants={item}>
                 <Link
                   href={`/icons?category=${slug}`}
-                  className='group block rounded-sm border border-zinc-800 bg-zinc-900/40 p-8 transition-colors hover:border-zinc-600 hover:bg-zinc-900/80'
+                  className='group block border border-zinc-800 bg-zinc-900/40 p-8 transition-colors hover:border-zinc-600 hover:bg-zinc-900/80'
                 >
-                  <h2 className='text-xl font-semibold text-white group-hover:text-white'>{info?.name ?? slug}</h2>
-                  <p className='mt-2 text-sm text-zinc-500'>{info?.description}</p>
+                  <div className='space-y-8 text-lg font-light leading-relaxed text-white/60 md:text-xl'>
+                    <p className='text-2xl leading-relaxed text-white/80 md:text-4xl'>{info?.name ?? slug}</p>
+                    <p>{info?.description}</p>
+                  </div>
                   <span className='mt-4 inline-block text-sm font-medium text-zinc-400 transition-colors group-hover:text-white'>
-                    View icons →
+                    View icons
+                    <HugeiconsIcon
+                      icon={ArrowRight02Icon}
+                      size='16'
+                      className='ml-1 inline-block transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-110'
+                    />
                   </span>
                 </Link>
               </motion.div>
@@ -124,15 +124,7 @@ export function LandingContent() {
       {/* Code strip */}
       <section className='border-t border-zinc-800/80 bg-zinc-950/50'>
         <div className='mx-auto px-6 py-16'>
-          <motion.p
-            className='mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            Use it
-          </motion.p>
+          <p className='mb-3 text-2xl font-medium leading-tight tracking-tight text-white/30 md:text-5xl lg:text-6xl'>Usage</p>
           <motion.div
             className='overflow-x-auto rounded-sm border border-zinc-800 bg-black/50 p-6 font-mono text-sm text-zinc-300'
             initial={{ opacity: 0, y: 8 }}

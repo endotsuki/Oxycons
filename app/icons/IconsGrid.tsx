@@ -36,10 +36,12 @@ export default function IconsGrid({ filteredIcons }: IconsGridProps) {
       {filteredIcons.map(({ category, icons }) => (
         <section key={category}>
           <div className='mb-8'>
-            <h2 className='text-2xl font-semibold text-white'>{getCategoryInfo(category)?.name ?? category}</h2>
-            <p className='mt-1 text-sm text-zinc-500'>{getCategoryInfo(category)?.description}</p>
+            <h3 className='mb-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl'>
+              {getCategoryInfo(category)?.name ?? category}
+            </h3>
+            <div className='mb-8 text-xl font-light text-white/60 md:text-2xl'>{getCategoryInfo(category)?.description}</div>
           </div>
-          <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-12'>
+          <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10'>
             {icons.map(({ name, component: Icon }) => {
               const id = `${category}-${name}`;
               return (
@@ -53,8 +55,8 @@ export default function IconsGrid({ filteredIcons }: IconsGridProps) {
                     onMouseLeave={() => setHovered('')}
                     className='group flex w-full flex-col items-center border border-zinc-800 bg-zinc-900/40 p-6 hover:border-zinc-600 hover:bg-zinc-900/80'
                   >
-                    {Icon && <Icon size={32} className='mb-3 text-zinc-400 group-hover:text-white' />}
-                    <span className='w-full truncate text-center text-xs text-zinc-500 group-hover:text-zinc-300'>{name}</span>
+                    {Icon && <Icon size={40} className='mb-3 text-zinc-400 group-hover:text-white' />}
+                    <p className='w-full truncate text-center text-xl text-zinc-500 group-hover:text-zinc-300'>{name}</p>
                     {copied === id && <span className='absolute text-xs text-emerald-400'>Copied</span>}
                   </button>
                   {hovered === id && (

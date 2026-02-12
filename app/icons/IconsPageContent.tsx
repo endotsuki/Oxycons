@@ -88,25 +88,16 @@ export default function IconsPageContent() {
     <div className='min-h-screen border-t border-zinc-800/80'>
       <div className='mx-auto px-6 py-12'>
         {/* Hero Section */}
-        <motion.div className='mb-16' initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-          <p className='mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500'>Browse</p>
-          <h1 className='flex items-center text-4xl font-bold tracking-tight text-white sm:text-5xl'>
-            Oxycons
-          </h1>
-          <p className='mt-4 max-w-xl text-lg text-zinc-400'>Click an icon to copy the import and component code.</p>
-          <motion.div
-            className='mt-8 flex flex-wrap items-center gap-6'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.15 }}
-          >
-            <span className='rounded-sm border border-zinc-700 bg-zinc-900/60 px-4 py-2 text-sm font-medium text-zinc-300'>
-              {totalIcons} icons
-            </span>
-            <span className='rounded-sm border border-zinc-700 bg-zinc-900/60 px-4 py-2 text-sm font-medium text-zinc-300'>
-              {CATEGORIES.length} categories
-            </span>
-          </motion.div>
+        <motion.div
+          className='mb-9 border-b-4 border-black'
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className='mb-6 text-7xl font-black uppercase tracking-tighter md:text-8xl lg:text-9xl'>Oxycons</h1>
+          <p className='max-w-3xl text-xl font-light leading-tight md:text-2xl lg:text-3xl'>
+            {totalIcons} icons organized by category. Click to copy code.
+          </p>
         </motion.div>
 
         {/* Search & Filters */}
