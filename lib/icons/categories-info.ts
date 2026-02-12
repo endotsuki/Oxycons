@@ -4,44 +4,36 @@
  * they use createIcon() which is client-only.
  */
 
-export const CATEGORIES = [
-  "programming",
-  "app",
-  "design-tools",
-  "ai",
-  "tools",
-  "framework",
-  "company",
-] as const;
+export const CATEGORIES = ['programming', 'app', 'design-tools', 'ai', 'tools', 'framework', 'company'] as const;
 
 const CATEGORY_INFO: Record<string, { name: string; description: string }> = {
   programming: {
-    name: "Programming",
-    description: "Programming languages and web technologies",
+    name: 'Programming',
+    description: 'Programming languages and web technologies',
   },
   app: {
-    name: "App",
-    description: "Application and device related icons",
+    name: 'App',
+    description: 'Application and device related icons',
   },
-  "design-tools": {
-    name: "Design Tools",
-    description: "Design and creative software icons",
+  'design-tools': {
+    name: 'Design Tools',
+    description: 'Design and creative software icons',
   },
   ai: {
-    name: "AI",
-    description: "Artificial intelligence and machine learning icons",
+    name: 'AI',
+    description: 'Artificial intelligence and machine learning icons',
   },
   tools: {
-    name: "Tools",
-    description: "Development and utility tools icons",
+    name: 'Tools',
+    description: 'Development and utility tools icons',
   },
   framework: {
-    name: "Framework",
-    description: "Web frameworks and libraries icons",
+    name: 'Framework',
+    description: 'Web frameworks and libraries icons',
   },
-  Company: {
-    name: "Company",
-    description: "Tech companies and brands icons",
+  company: {
+    name: 'Company',
+    description: 'Tech companies and brands icons',
   },
 };
 
