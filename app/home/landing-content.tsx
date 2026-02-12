@@ -7,6 +7,9 @@ import LightPillar from '@/components/LightPillar';
 import { Button } from '@/components/ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight02Icon } from '@hugeicons/core-free-icons';
+import { AnimatedSpan, Terminal, TypingAnimation } from '@/components/ui/terminal';
+import pkg from '../../package.json';
+import oxyconsPkg from '../../package.json';
 
 const container = {
   hidden: { opacity: 0 },
@@ -20,6 +23,9 @@ const item = {
   hidden: { opacity: 0, y: 12 },
   show: { opacity: 1, y: 0 },
 };
+const version = pkg.version;
+const name = pkg.name;
+const depsCount = Object.keys(oxyconsPkg.dependencies || {}).length;
 
 export function LandingContent() {
   return (
@@ -42,7 +48,7 @@ export function LandingContent() {
             quality='high'
           />
         </div>
-        <div className='relative z-10 mx-auto px-6 py-24 sm:py-32'>
+        <div className='relative z-10 mx-auto max-w-4xl px-6 py-24 sm:py-32 lg:ml-0'>
           <p className='mb-3 text-2xl font-medium leading-tight tracking-tight text-white/30 md:text-5xl lg:text-6xl'>Icons library</p>
           <motion.h1
             className='max-w-4xl text-5xl font-black uppercase tracking-tight text-white sm:text-5xl md:text-6xl lg:text-8xl'
@@ -68,7 +74,7 @@ export function LandingContent() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Link href='/icons' className='group'>
-              <Button variant='primary' className='hover:bg-zinc-200'>
+              <Button variant='primary' className='hover:bg-zinc-600'>
                 Browse Icons
                 <HugeiconsIcon
                   icon={ArrowRight02Icon}
@@ -77,10 +83,30 @@ export function LandingContent() {
                 />
               </Button>
             </Link>
-            <span className='inline-flex h-12 items-center rounded-sm border border-zinc-700 bg-zinc-900/50 px-6 font-mono text-sm text-zinc-400'>
-              npm install @onimuxha/oxycons
-            </span>
           </motion.div>
+        </div>
+        <div className='hidden lg:absolute lg:right-16 lg:top-1/2 lg:block lg:w-[520px] lg:-translate-y-1/2'>
+          <Terminal>
+            <TypingAnimation delay={0}>$ pnpm add @onimuxha/oxycons</TypingAnimation>
+            <AnimatedSpan delay={600} className='text-zinc-400'>
+              Packages: +1
+            </AnimatedSpan>
+            <AnimatedSpan delay={1200} className='text-cyan-400'>
+              {name}
+            </AnimatedSpan>
+            <AnimatedSpan delay={1400} className='text-zinc-500'>
+              {version}
+            </AnimatedSpan>
+            <AnimatedSpan delay={600} className='text-zinc-400'>
+              Packages: +{depsCount + 1}
+            </AnimatedSpan>
+            <AnimatedSpan delay={1800} className='text-zinc-500'>
+              Progress: resolved 1, reused 0, downloaded 1, added 1
+            </AnimatedSpan>
+            <AnimatedSpan delay={2400} className='text-emerald-400'>
+              Done in 1.3s
+            </AnimatedSpan>
+          </Terminal>
         </div>
       </section>
 

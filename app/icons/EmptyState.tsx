@@ -13,8 +13,10 @@ export default function EmptyState() {
           preserveAspectRatio: 'xMidYMid slice',
         }}
       />
-      <p className='text-lg font-medium text-zinc-400'>No icons match your filters.</p>
-      <p className='mt-2 text-sm text-zinc-500'>Try a different search or category.</p>
+      <div className='space-y-2 text-lg font-light leading-relaxed text-white/60 md:text-xl'>
+        <p className='text-2xl leading-relaxed text-white/80 md:text-4xl'>No icons match your filters</p>
+        <p>Try a different search or category.</p>
+      </div>
     </div>
   );
 }
