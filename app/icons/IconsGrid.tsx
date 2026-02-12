@@ -17,7 +17,7 @@ export default function IconsGrid({ filteredIcons }: IconsGridProps) {
   const refs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const copy = (name: string, cat: string) => {
-    navigator.clipboard.writeText(`import { Oxycons } from '@onimuxha/oxycons';\n\n<Oxycons.${name} size={24} />`);
+    navigator.clipboard.writeText(`import { Oxycons } from '@onimuxha/oxycons';\n\n<Oxycons name="${name}" size={24} />`);
     setCopied(`${cat}-${name}`);
     setTimeout(() => setCopied(''), 2000);
   };
