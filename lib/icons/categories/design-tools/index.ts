@@ -18,6 +18,7 @@ export { LightroomClassic } from "./lightroom-classic";
 export { Photoshop } from "./photoshop";
 export { PremierePro } from "./premiere-pro";
 export { SVG } from "./svg";
+export { Sass } from "./sass";
 export { Sketch } from "./sketch";
 export { Unsplash } from "./unsplash";
 export { XD } from "./xd";

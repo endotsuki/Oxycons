@@ -23,18 +23,18 @@ export default function SearchAndFilters({
       {/* Search Input */}
       <div className='relative w-full max-w-2xl'>
         <input
-          id='search'
+          // id='search'
           type='text'
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder='Search icons...'
-          className='w-full border-b-2 bg-transparent py-6 pl-0 pr-10 text-2xl text-white placeholder-white/30 transition-colors focus:border-white focus:outline-none md:text-3xl'
+          className='peer w-full border-b-2 bg-transparent py-6 pl-0 pr-10 text-2xl text-white placeholder-white/30 transition-colors focus:border-white focus:outline-none md:text-3xl'
         />
 
         <HugeiconsIcon
           icon={Search01Icon}
           strokeWidth={2}
-          className='pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-white/50'
+          className='pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-white/50 transition-colors peer-focus:text-sky-500'
           size={28}
         />
       </div>

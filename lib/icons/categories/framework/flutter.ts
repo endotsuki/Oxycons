@@ -1,7 +1,7 @@
 import { createIcon } from '../../create-icon';
 
-export const IconName = createIcon({
-  name: 'Icon Name',
+export const Flutter = createIcon({
+  name: 'Flutter',
   viewBox: '0 0 24 24',
   paths: [
     {

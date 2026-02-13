@@ -15,6 +15,7 @@ export { Airtable } from "./airtable";
 export { AlpineLinux } from "./alpine-linux";
 export { Anaconda } from "./anaconda";
 export { Ansible } from "./ansible";
+export { Apache } from "./apache";
 export { Arch } from "./arch";
 export { Bitwarden } from "./bitwarden";
 export { DNS1111 } from "./1.1.1.1";

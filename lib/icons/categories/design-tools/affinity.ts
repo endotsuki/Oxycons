@@ -19,6 +19,5 @@ export const Affinity = createIcon({
     'vector',
     'illustration',
     'creative software',
-    'digital art',
   ],
 });
