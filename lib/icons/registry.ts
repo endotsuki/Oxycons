@@ -24,7 +24,7 @@ const iconRegistry = {
   ...Framework,
   // Company
   ...Company,
-};
+} as const;
 
 /**
  * Type-safe icon names for autocomplete support
@@ -36,7 +36,7 @@ export type IconName = keyof typeof iconRegistry;
  */
 export interface OxyconsProps extends IconProps {
   /** Icon name to render - supports autocomplete for all available icons */
-  name?: IconName;
+  name: IconName;
 }
 
 /**
@@ -49,7 +49,7 @@ const OxyconsComponent = React.forwardRef<SVGSVGElement, OxyconsProps>(({ name, 
     return null;
   }
 
-  const IconComponent = (iconRegistry as any)[name] as React.ComponentType<IconProps>;
+  const IconComponent = iconRegistry[name];
 
   if (!IconComponent) {
     console.warn(`Oxycons: Icon "${name}" not found in registry`);
@@ -70,8 +70,8 @@ export const Oxycons = OxyconsComponent;
 export type OxyconsType = typeof Oxycons;
 
 // Get all icon names
-export const getIconNames = (): string[] => {
-  return Object.keys(Oxycons);
+export const getIconNames = (): IconName[] => {
+  return Object.keys(iconRegistry) as IconName[];
 };
 
 // Get all categories with their icons
