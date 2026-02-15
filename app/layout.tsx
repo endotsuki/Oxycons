@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Oxycons',
-  description: 'A comprehensive, categorized React icon library. Sharp. Dark. Ready.',
+  description: 'Oxycons is a React icon library that provides a collection of customizable and accessible icons for your projects.',
   metadataBase: new URL('https://oxycons.onrender.com'),
 
   icons: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: 'Oxycons',
-    description: 'A comprehensive, categorized React icon library. Sharp. Dark. Ready.',
+    description: 'Oxycons is a React icon library that provides a collection of customizable and accessible icons for your projects.',
     url: 'https://oxycons.onrender.com',
     siteName: 'Oxycons',
     images: [
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Oxycons',
-    description: 'A comprehensive, categorized React icon library. Sharp. Dark. Ready.',
+    description: 'Oxycons is a React icon library that provides a collection of customizable and accessible icons for your projects.',
     images: ['/og-image.png'],
   },
 };
